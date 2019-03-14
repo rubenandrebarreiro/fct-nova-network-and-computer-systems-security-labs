@@ -4,8 +4,8 @@
 
 Lab lectured by [**_Prof. Henrique João Domingos_**](http://asc.di.fct.unl.pt/~hj/).
 
-#### Contacts
+### Contacts
 
-##### E-mails:
+#### E-mails:
 
 * [**_hj@fct.unl.pt_**](mailto:hj@fct.unl.pt)
