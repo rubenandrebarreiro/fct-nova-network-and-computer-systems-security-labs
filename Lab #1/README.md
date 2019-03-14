@@ -1,4 +1,4 @@
-# FCT NOVA - Network and Computer Systems Security Lab #1 - March 14, 2019
+# FCT NOVA - Network and Computer Systems Security Lab #1 - March 14, 2019 (Thursday)
 
 > 
 
