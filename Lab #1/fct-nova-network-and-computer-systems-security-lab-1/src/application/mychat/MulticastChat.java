@@ -24,6 +24,7 @@ import java.net.*;
  * extending the Java's Thread.
  */
 public class MulticastChat extends Thread {
+	
 	// Constants/Invariants:
 
 	/**
@@ -52,6 +53,11 @@ public class MulticastChat extends Thread {
 	 */
 	public static final int DEFAULT_SOCKET_TIMEOUT_MILLIS = 5000;
 	
+	/**
+	 * The length of the packet of the messages that is allowed to be received.
+	 */
+	public static final int MESSAGE_PACKET_LENGTH = 65508;
+	
 	
 	// Global Instance Variables:
 	
@@ -63,12 +69,12 @@ public class MulticastChat extends Thread {
 	protected MulticastSocket multicastSocket;
 	
 	/**
-	 * The Username used by the client/host of the Multicast Chat's Service.
+	 * The Username used by the host/user (client) of the Multicast Chat's Service.
 	 */
 	protected String username;
 	
 	/**
-	 * The IP Group used by this Multicast Chat's Service.
+	 * The IP Group used by this Multicast Chat's Service, that the host/user (client) pretends to join.
 	 */
 	protected InetAddress multicastIPGroup;
 	
@@ -89,12 +95,14 @@ public class MulticastChat extends Thread {
 	/**
 	 * 
 	 * 
-	 * @param username
-	 * @param multicastIPGroup
-	 * @param port
-	 * @param timeToLive
-	 * @param eventListener
-	 * @throws IOException
+	 * @param username the Username used by the host/user (client) of the Multicast Chat's Service
+	 * @param multicastIPGroup the IP Group used by this Multicast Chat's Service,
+	 * 		  that the host/user (client) pretends to join
+	 * @param port the port to communicate in this Multicast Chat's Service
+	 * @param timeToLive the Time To Live (TTL) associated to this Multicast Chat's Service
+	 * @param eventListener the Event Listener to catch events sent through the Multicast Chat's Service
+	 * 
+	 * @throws IOException an Input/Output Exception to be thrown, in the case of, an anomaly occurs
 	 */
 	public MulticastChat(String username, InetAddress multicastIPGroup, int port, 
                        int timeToLive, MulticastChatEventListener eventListener) throws IOException {
@@ -110,36 +118,48 @@ public class MulticastChat extends Thread {
 		this.multicastSocket.setTimeToLive(timeToLive);
 		this.multicastSocket.joinGroup(this.multicastIPGroup);
 
-		// start receive thread and send multicast join message
+		// Start the process of Receiving Messages in this extended Thread and send also,
+		// a JOIN message by a Multicast communication
 		start();
-		this.sendJoin();
+		this.sendJoinMessage();
 	}
+	
+	
+	// Methods/Functions:
+	
+	
+	// 1) Some basic methods:
 	
 	/**
 	 * Request an asynchronous termination of the execution's thread of the Multicast Chat's Service.
 	 * 
 	 * @throws IOException an Input/Output Exception to be thrown
 	 */
-	public void terminate() throws IOException {
+	public void terminateService() throws IOException {
 		this.isActive = false;
-		sendLeave();
+		
+		// Send a LEAVE message by the Multicast communication in use
+		sendLeaveMessage();
 	} 
 
 	/**
-	 * Issue an error message, in a case of an anomaly occurs.
+	 * Issue and print an error message, in a case of an anomaly occurs.
 	 * 
 	 * @param errorMessage the error message to be shown
 	 */
-	protected void error(String errorMessage) {
+	protected void printErrorMessage(String errorMessage) {
 		System.err.println(new java.util.Date() + ": Multicast Chat's Service: " + errorMessage);
 	} 
 
+	
+	// 2) Communications/Messages methods:
+	
 	/**
-	 * Send a JOIN message through the Multicast Chat's Service.
+	 * Send a JOIN message through the Multicast Chat's Service, to the other Event Listeners.
 	 * 
 	 * @throws IOException an Input/Output Exception to be thrown
 	 */
-	protected void sendJoin() throws IOException {
+	protected void sendJoinMessage() throws IOException {
 		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 		DataOutputStream dataStream = new DataOutputStream(byteStream);
 
@@ -150,22 +170,22 @@ public class MulticastChat extends Thread {
 
 		byte[] data = byteStream.toByteArray();
 		DatagramPacket packet = new DatagramPacket(data, data.length, this.multicastIPGroup,
-														 this.multicastSocket.getLocalPort());
+												   		 this.multicastSocket.getLocalPort());
 		
 		// Send the Datagram Packet related to the JOIN message to be sent through the Multicast Chat's Service
 		this.multicastSocket.send(packet);
 	} 
 
 	/**
-	 * Process a JOIN message received through the Multicast Chat's Service, with a notification.
+	 * Process a JOIN message received through the Multicast Chat's Service, with a notification to the other Event Listeners.
 	 * 
-	 * @param dataInputStream
-	 * @param address
-	 * @param port
+	 * @param dataInputStream the Data Input Stream which through the 
+	 * @param address the address to where the JOIN message will be sent
+	 * @param port the port used for do the exchange of messages in this communication
 	 * 
-	 * @throws IOException
+	 * @throws IOException an Input/Output Exception to be thrown
 	 */
-	protected void processJoin(DataInputStream dataInputStream, InetAddress address, int port) throws IOException {
+	protected void processJoinMessage(DataInputStream dataInputStream, InetAddress address, int port) throws IOException {
 		String name = dataInputStream.readUTF();
 
 		try {
@@ -175,11 +195,11 @@ public class MulticastChat extends Thread {
 	} 
 	
 	/**
-	 * Send a LEAVE message through the Multicast Chat's Service.
+	 * Send a LEAVE message through the Multicast Chat's Service, to the other Event Listeners.
 	 * 
 	 * @throws IOException an Input/Output Exception to be thrown
 	 */
-	protected void sendLeave() throws IOException {
+	protected void sendLeaveMessage() throws IOException {
 
 		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 		DataOutputStream dataStream = new DataOutputStream(byteStream);
@@ -193,51 +213,63 @@ public class MulticastChat extends Thread {
 		DatagramPacket packet = new DatagramPacket(data, data.length, this.multicastIPGroup, this.multicastSocket.getLocalPort());
 		
 		this.multicastSocket.send(packet);
-  } 
+	}
+	
+	/**
+	 * Process a LEAVE message received through the Multicast Chat's Service, with a notification to the others Event Listeners.
+	 * 
+	 * @param dataInputStream the Data Input Stream which through the 
+	 * @param address the address to where the JOIN message will be sent
+	 * @param port the port used for do the exchange of messages in this communication
+	 * 
+	 * @throws IOException an Input/Output Exception to be thrown
+	 */
+	protected void processLeaveMessage(DataInputStream istream, InetAddress address, int port) throws IOException {
+		String username = istream.readUTF();
 
-  // Processes a multicast chat LEAVE PDU and notifies listeners
-  // Processamento de mensagem de LEAVE  // 
-  
-  
-  protected void processLeave(DataInputStream istream, InetAddress address, 
-                              int port) throws IOException {
-	  String username = istream.readUTF();
+		try {
+			this.eventListener.chatParticipantLeft(username, address, port);
+		}
+		catch (Throwable e) {}
+	} 
 
-	  try {
-		  this.eventListener.chatParticipantLeft(username, address, port);
-	  }
-	  catch (Throwable e) {}
-  } 
+	/**
+	 * Send a normal message through the Multicast Chat's Service, to the other Event Listeners.
+	 * 
+	 * @param message the message pretended to be sent through the Multicast Chat's Service
+	 * 
+	 * @throws IOException an Input/Output Exception to be thrown
+	 */
+	public void sendNormalMessage(String message) throws IOException {
 
-  // Envio de uma mensagem normal
-  // 
-  public void sendMessage(String message) throws IOException {
+		ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+		DataOutputStream dataOutputStream = new DataOutputStream(byteOutputStream);
 
-    ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-    DataOutputStream dataStream = new DataOutputStream(byteStream);
+		dataOutputStream.writeLong(CHAT_MAGIC_NUMBER);
+		dataOutputStream.writeInt(MESSAGE);
+		dataOutputStream.writeUTF(username);
+		dataOutputStream.writeUTF(message);
+    
+		dataOutputStream.close();
 
-    dataStream.writeLong(CHAT_MAGIC_NUMBER);
-    dataStream.writeInt(MESSAGE);
-    dataStream.writeUTF(username);
-    dataStream.writeUTF(message);
-    dataStream.close();
-
-    byte[] data = byteStream.toByteArray();
-    DatagramPacket packet = new DatagramPacket(data, data.length, this.multicastIPGroup, 
+		byte[] data = byteOutputStream.toByteArray();
+		DatagramPacket packet = new DatagramPacket(data, data.length, this.multicastIPGroup, 
                                                this.multicastSocket.getLocalPort());
-    this.multicastSocket.send(packet);
-  } 
+		
+		this.multicastSocket.send(packet);
+	}
 
-  /**
-   * Processing of a normal message received through the Multicast Chat's Service.
-   * 
-   * @param dataInputStream the Data Input Stream where the message it's received
-   * @param address the address used to receive 
-   * @param port
-   * 
-   * @throws IOException an Input/Output Exception to be thrown
-   */
-  	protected void processMessage(DataInputStream dataInputStream, InetAddress address, int port) throws IOException {
+	/**
+	 * Processing of a normal message received through the Multicast Chat's Service.
+	 * 
+	 * @param dataInputStream the Data Input Stream which through the 
+	 * @param address the address to where the JOIN message will be sent
+	 * @param port the port used for do the exchange of messages in this communication
+	 * 
+	 * @throws IOException an Input/Output Exception to be thrown
+	 */
+  	protected void processNormalMessage(DataInputStream dataInputStream, InetAddress address, int port) throws IOException {
+  		
   		String username = dataInputStream.readUTF();
   		String message = dataInputStream.readUTF();
 
@@ -245,23 +277,26 @@ public class MulticastChat extends Thread {
   			this.eventListener.chatMessageReceived(username, address, port, message);
   		}
   		catch (Throwable inputOrOutputException) {}
-  	} 
-
-  	// Loops - recepcao e desmultiplexagem de datagramas de acordo com
-  	// as operacoes e mensagens
-  	//
+  	}
   	
   	/**
+  	 * The main process of this Multicast Chat's Service. This service, since the moment that it's started,
+  	 * starts waiting the receive of messages using the Multicast communication associated to this Service,
+  	 * accordingly to the IP Group used by this Multicast Chat's Service.
   	 * 
+  	 * Every time that a message is received, this process will de-multiplex the Datagram associated to the message receive,
+  	 * accordingly to the operations and messages defined and allowed by this Service.
   	 */
   	public void run() {
-  		byte[] buffer = new byte[65508];
+  		
+  		byte[] buffer = new byte[MESSAGE_PACKET_LENGTH];
   		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 
   		while (this.isActive) {
   			try {
 
-  				// Comprimento do DatagramPacket RESET antes do request
+  				// Set the length of the packet that is allowed to be received
+  				// For each iteration, this length is reseted
   				packet.setLength(buffer.length);
   				this.multicastSocket.receive(packet);
 
@@ -271,35 +306,37 @@ public class MulticastChat extends Thread {
 
   				long magicNumber = dataInputStream.readLong();
 
-  				// Only continues all the entire process if the Magic Number it's different
+  				// Only continues all the entire process if the Magic Numbers are different TODO
   				if(magicNumber != CHAT_MAGIC_NUMBER)
   					continue;
     		
   				int operationCode = dataInputStream.readInt();
-        
+  				
+  				// The operations and messages defined and allowed by this Service
   				switch (operationCode) {
 			  		case JOIN:
-			  			processJoin(dataInputStream, packet.getAddress(), packet.getPort());
+			  			this.processJoinMessage(dataInputStream, packet.getAddress(), packet.getPort());
 			  			break;
 			  		case LEAVE:
-			  			processLeave(dataInputStream, packet.getAddress(), packet.getPort());
+			  			this.processLeaveMessage(dataInputStream, packet.getAddress(), packet.getPort());
 			  			break;
 			  		case MESSAGE:
-			  			processMessage(dataInputStream, packet.getAddress(), packet.getPort());
+			  			this.processNormalMessage(dataInputStream, packet.getAddress(), packet.getPort());
 			  			break;
 			  		default:
-			  			error("Unknown operation code " + operationCode + " sent by " 
+			  			this.printErrorMessage("Unknown operation code " + operationCode + " sent by " 
 			  				   + packet.getAddress() + ":" + packet.getPort());
   				}
   			}
-  			catch (InterruptedIOException interruptedException) {
+  			catch (InterruptedIOException interruptedIOException) {
   				/**
+  				 * TODO
   				 * O timeout e usado apenas para forcar um loopback e testar unknown
   				 * o valor isActive 
   				 */	 
   			}
   			catch (Throwable errorMessage) {
-  				error("Processing error: " + errorMessage.getClass().getName() + ": " 
+  				this.printErrorMessage("Processing error: " + errorMessage.getClass().getName() + ": " 
   					   + errorMessage.getMessage());
   			} 
   		} 

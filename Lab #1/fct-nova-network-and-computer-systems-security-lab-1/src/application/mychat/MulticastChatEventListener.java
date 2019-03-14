@@ -30,9 +30,9 @@ public interface MulticastChatEventListener extends EventListener {
   /**
    * Invoked when a Multicast chat message in Client-Side Application has been received.
    * 	
-   * @param username the username of the user (client)
-   * @param host the address of th host/user (client)
-   * @param port the port used by the user (client) to communicate, send/receive messages,
+   * @param username the username of the host/user (client)
+   * @param host the address of the host/user (client)
+   * @param port the port used by host/the user (client) to communicate, send/receive messages,
    * 		join and/or left
    * @param message the message received by the user (client)
    */
@@ -41,9 +41,9 @@ public interface MulticastChatEventListener extends EventListener {
   /**
    * Invoked when a Multicast participant in Client-Side Application has joined.
    * 
-   * @param username the username of the user (client)
+   * @param username the username of the host/user (client)
    * @param host the address of the host/user (client)
-   * @param port the port used by the user (client) to communicate, send/receive messages,
+   * @param port the port used by the host/user (client) to communicate, send/receive messages,
    * 		join and/or left
    */
   void chatParticipantJoined(String username, InetAddress host, int port);
@@ -51,9 +51,9 @@ public interface MulticastChatEventListener extends EventListener {
   /**
    * Invoked when a Multicast participant in Client-Side Application has left.
    * 
-   * @param username the username of the user (client)
+   * @param username the username of the host/user (client)
    * @param host the address of the host/user (client)
-   * @param port the port used by the user (client) to communicate, send/receive messages,
+   * @param port the port used by the host/user (client) to communicate, send/receive messages,
    * 		join and/or left the chat
    */
   void chatParticipantLeft(String username, InetAddress host, int port);
