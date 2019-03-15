@@ -88,7 +88,7 @@ git clone git@github.com:rubenandrebarreiro/fct-nova-network-and-computer-system
 * [**_JetBrains IntelliJ IDEA_**](https://www.jetbrains.com/idea/)
 
 ## Contributors
-> [Henrique João Domingos]()
+> [Henrique João Domingos](http://asc.di.fct.unl.pt/~hj/)
 
 > [Rúben André Barreiro](https://github.com/rubenandrebarreiro/)
 
