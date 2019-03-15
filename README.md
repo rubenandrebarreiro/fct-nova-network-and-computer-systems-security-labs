@@ -84,27 +84,20 @@ git clone git@github.com:rubenandrebarreiro/fct-nova-network-and-computer-system
 
 ## Built with
 * [**_Java_**](https://www.java.com/)
-* [**_JADE (JAVA Agent DEvelopment Framework)_**](http://jade.tilab.com/)
-* [**_Rapid Miner Studio_**](https://rapidminer.com/products/studio/)
 * [**_Eclipse IDE 2018-12_**](https://www.eclipse.org/)
 * [**_JetBrains IntelliJ IDEA_**](https://www.jetbrains.com/idea/)
 
 ## Contributors
-> [Bernardo José Leite](https://github.com/bernardoleite/)
-
-> [Bruno Miguel Pinto](https://github.com/bruno02960/)
+> [Henrique João Domingos]()
 
 > [Rúben André Barreiro](https://github.com/rubenandrebarreiro/)
 
 
 ## Contacts
-### Bernardo José Leite
-#### E-mails
-* [up201404464@fe.up.pt](mailto:up201404464@fe.up.pt)
 
-### Bruno Miguel Pinto
+### Henrique João Domingos
 #### E-mails
-* [up201502960@fe.up.pt](mailto:up201502960@fe.up.pt)
+* [hj@fct.unl.pt](mailto:hj@fct.unl.pt)
 
 ### Rúben André Barreiro
 #### E-mails
@@ -115,14 +108,6 @@ git clone git@github.com:rubenandrebarreiro/fct-nova-network-and-computer-system
 
 ## Portfolios/Blogs and Git Hosting/Repository Services
 
-### Bernardo José Leite
-#### Hosting/Repository Services
-* [https://github.com/bernardoleite/](https://github.com/bernardoleite/)
-
-### Bruno Miguel Pinto
-#### Hosting/Repository Services
-* [https://github.com/bruno02960/](https://github.com/bruno02960/)
-
 ### Rúben André Barreiro
 #### GitHub's Portfolio/Personal Blog
 * [https://rubenandrebarreiro.github.io/](https://rubenandrebarreiro.github.io/)
@@ -131,14 +116,4 @@ git clone git@github.com:rubenandrebarreiro/fct-nova-network-and-computer-system
 * [https://github.com/rubenandrebarreiro/](https://github.com/rubenandrebarreiro/)
 * [https://gitlab.com/rubenandrebarreiro/](https://gitlab.com/rubenandrebarreiro/)
 * [https://bitbucket.org/rubenandrebarreiro/](https://bitbucket.org/rubenandrebarreiro/)
-
-
-## Classifications/Final Approval Grades
-
-### Approval Grade of Part 1 of Lab Work
-* 18 of 20
-
-### Approval Grade of Part 2 of Lab Work
-* 17 of 20
-
 
