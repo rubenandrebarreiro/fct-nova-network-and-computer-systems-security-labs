@@ -36,7 +36,7 @@
 
 ## Description
 
-> A [**_1rd year's project_**](http://www.unl.pt/guia/2018/fct/UNLGI_getCurso?curso=935) of the [**_MSc. degree of Informatics and Computing Engineering_**](https://www.fct.unl.pt/en/education/course/integrated-master-computer-science/) made in [**_FCT NOVA (Faculty of Sciences and Technology of New University of Lisbon)_**](https://www.fct.unl.pt/), in the subject of [**_Network and Computer Systems Security_**](http://www.unl.pt/guia/2018/fct/UNLGI_getUC?uc=11619). These projects was built using [**_Java_**](https://www.java.com/). This repository it's based in some _practical lab exercises and examples_ related with [**_Network and Computer Systems Security_**](http://www.unl.pt/guia/2018/fct/UNLGI_getUC?uc=11619) mechanisms and tools, as _cryptography_, _authentication methods_, _hashing of messages_, among many others!
+> A [**_1rd year's project_**](http://www.unl.pt/guia/2018/fct/UNLGI_getCurso?curso=935) of the [**_MSc. degree of Informatics and Computing Engineering_**](https://www.fct.unl.pt/en/education/course/integrated-master-computer-science/) made in [**_FCT NOVA (Faculty of Sciences and Technology of New University of Lisbon)_**](https://www.fct.unl.pt/), in the subject of [**_Network and Computer Systems Security_**](http://www.unl.pt/guia/2018/fct/UNLGI_getUC?uc=11619). This projects was built using [**_Java_**](https://www.java.com/). This repository it's based in some _practical lab exercises and examples_ related with [**_Network and Computer Systems Security_**](http://www.unl.pt/guia/2018/fct/UNLGI_getUC?uc=11619) mechanisms and tools, as _cryptography_, _authentication methods_, _hashing of messages_, among many others!
 
 ## Screenshots
 
