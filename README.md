@@ -6,7 +6,7 @@
 ***
 
 ## Current Status
-[![contributor for this repository](https://img.shields.io/badge/contributor-henrique&nbsp;joao&nbsp;domingos-blue.svg)]() [![contributor for this repository](https://img.shields.io/badge/contributor-rubenandrebarreiro-blue.svg)](https://github.com/rubenandrebarreiro/) [![developed in](https://img.shields.io/badge/developed&nbsp;in-fct&nbsp;nova-blue.svg)](https://www.fe.up.pt/)
+[![contributor for this repository](https://img.shields.io/badge/contributor-henrique&nbsp;joao&nbsp;domingos-blue.svg)](http://asc.di.fct.unl.pt/~hj/) [![contributor for this repository](https://img.shields.io/badge/contributor-rubenandrebarreiro-blue.svg)](https://github.com/rubenandrebarreiro/) [![developed in](https://img.shields.io/badge/developed&nbsp;in-fct&nbsp;nova-blue.svg)](https://www.fe.up.pt/)
 [![current version](https://img.shields.io/badge/version-1.0-magenta.svg)](https://github.com/rubenandrebarreiro/fct-nova-network-and-computer-systems-security-labs/)
 
 [![status of this version no. 1](https://img.shields.io/badge/status-not&nbsp;completed-orange.svg)](https://github.com/rubenandrebarreiro/fct-nova-network-and-computer-systems-security-labs/)
@@ -88,7 +88,7 @@ git clone git@github.com:rubenandrebarreiro/fct-nova-network-and-computer-system
 * [**_JetBrains IntelliJ IDEA_**](https://www.jetbrains.com/idea/)
 
 ## Contributors
-> [Henrique João Domingos](http://asc.di.fct.unl.pt/~hj/)
+> [Henrique João Domingos (Professor)](http://asc.di.fct.unl.pt/~hj/)
 
 > [Rúben André Barreiro](https://github.com/rubenandrebarreiro/)
 
