@@ -50,143 +50,257 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	protected MulticastChat chat;
 
 	/**
-	 * The text-area where will be showed the messages of the conversation of this Multicast Chat's Client-Side Service,
-	 * including the JOIN message, when someone joins to this Multicast Chat.
+	 * The text-area where will be showed the messages of the conversation of
+	 * this Multicast Chat's Client-Side Service, including the JOIN message,
+	 * when someone joins to this Multicast Chat.
 	 */
 	protected JTextArea conversationMessagesTextArea;
 
 	/**
-	 * The text-field where the messages to be sent through the conversation of this Multicast Chat's Client-Side Service,
-	 * can be written before be sent.
+	 * The text-field where the messages to be sent through the conversation of
+	 * this Multicast Chat's Client-Side Service, can be written before be sent.
 	 */
 	protected JTextField messageToBeSentField;
 	
-	// Campo de texto onde se dara a entrada do ficheiro a fazer download
 	/**
-	 * The text-field TODO
+	 * The text-field where can be placed the file to be able to download.
 	 */
-	protected JTextField fileField;
+	protected JTextField fileToBeDownloadTextField;
 	
 	/**
-	 * The list hosts/users (clients) currently "online" or active in this Multicast Chat's Client-Side Service.
+	 * The list hosts/users (clients) currently "online" or active in
+	 * this Multicast Chat's Client-Side Service.
 	 */
 	protected DefaultListModel<String> usersInChat;
 
-	// Construtor para uma frame com do chat Multicast (initialised in a state of disconnected)
 	
+	// Constructors:
 	
 	/**
+	 * Constructor #1:
 	 * 
+	 * Construct a frame for this Multicast Chat's Client-Side Service
+	 * (initialised in a state of Disconnected).
 	 */
 	public MulticastChatClient() {
 		
-		super("Multicast Chat (Mode: disconnected)");
+		super("Multicast Chat (Mode: Disconnected)");
 
-		// Construct and initialise the components of the Graphics User Interface (Session's Start/Initialising)
-		conversationMessagesTextArea = new JTextArea();
-		conversationMessagesTextArea.setEditable(false);
-		conversationMessagesTextArea.setLineWrap( true);
-		conversationMessagesTextArea.setBorder(BorderFactory.createLoweredBevelBorder());
+		// Construct and initialise the components of the Graphics User Interface
+		// (Session's Start/Initialising)
+		this.conversationMessagesTextArea = new JTextArea();
+		this.conversationMessagesTextArea.setEditable(false);
+		this.conversationMessagesTextArea.setLineWrap(true);
+		this.conversationMessagesTextArea.setBorder(BorderFactory.createLoweredBevelBorder());
 
-		// Set the Scroll Bars for this Multicast Chat's Client-Side Service
-		JScrollPane textAreaScrollPane = new JScrollPane(conversationMessagesTextArea, 
+		// Set the Scroll Bar Pane for this Multicast Chat's Client-Side Service
+		JScrollPane textAreaScrollPane = new JScrollPane(this.conversationMessagesTextArea, 
 														 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
 														 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		// TODO
+		// Add the Scroll Bar Pane to the center of the main layout of
+		// this Multicast Chat's Client-Side Service
 		getContentPane().add(textAreaScrollPane, BorderLayout.CENTER);
 		
+		// Create the Users' List currently "online" or active to
+		// the main layout of this Multicast Chat's Client-Side Service
 		this.usersInChat = new DefaultListModel<String>();
 		JList<String> usersInChatList = new JList<String>(this.usersInChat);
 		
+		// Set the component of the Scroll Bars Pane of the
+		// Users' List currently "online" or active for
+		// this Multicast Chat's Client-Side Service
 		JScrollPane usersListScrollPane = new JScrollPane(usersInChatList, 
-														 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
-														 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER) {
+														  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
+														  JScrollPane.HORIZONTAL_SCROLLBAR_NEVER) {
+				
 				/**
-				 * 
+				 * The default serial version UID.
 				 */
 				private static final long serialVersionUID = 1L;
 				
+				/**
+				 * Returns the minimum size of the Scroll Bars Pane.
+				 * 
+				 * @return the minimum size of the Scroll Bars Pane 
+				 */
 				public Dimension getMinimumSize() {
-					Dimension d = super.getMinimumSize();
-					d.width = 100;
-					return d;
+					Dimension minimumDimension = super.getMinimumSize();
+					
+					// Set the width pretended on the minimum size of
+					// the Scroll Bars Pane
+					minimumDimension.width = 100;
+					
+					return minimumDimension;
 				}
+				
+				/**
+				 * Returns the preferred size of the Scroll Bar Pane.
+				 * 
+				 * @return the preferred size of the Scroll Bar Pane 
+				 */
 				public Dimension getPreferredSize() {
-					Dimension d = super.getPreferredSize();
-					d.width = 100;
-					return d;
+					Dimension preferredDimension = super.getPreferredSize();
+					
+					// Set the width pretended on the preferred size of
+					// the Scroll Bars Pane
+					preferredDimension.width = 100;
+					
+					return preferredDimension;
 				}
-			};
+		};
+		
+		// Create the Users' List currently "online" or active to
+		// the left side of the main layout of this
+		// Multicast Chat's Client-Side Service
 		getContentPane().add(usersListScrollPane, BorderLayout.WEST);
 
-		Box box = new Box( BoxLayout.Y_AXIS);
-		box.add( Box.createVerticalGlue());
+		Box mainLayoutBox = new Box(BoxLayout.Y_AXIS);
+		mainLayoutBox.add(Box.createVerticalGlue());
+		
+		// Create the panel of where the messages will be
+		// processed and all the related operations occur in
+		// the main layout of the Multicast Chat's Client-Side Service
 		JPanel messagePanel = new JPanel(new BorderLayout());
-
+		
+		// Add the label for the message panel for the text-field
+		// for the messages to be sent can be written on the left side of
+		// the main layout of this Multicast Chat's Client-Side Service
 		messagePanel.add(new JLabel("Message:"), BorderLayout.WEST);
-
-		messageToBeSentField = new JTextField();
-		messageToBeSentField.addActionListener( new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			sendMessage();
-			}
-			});
-		messagePanel.add(messageToBeSentField, BorderLayout.CENTER);
-
-		JButton sendButton = new JButton("SEND");
-		sendButton.addActionListener( new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			sendMessage();
-			}
-			});
-		messagePanel.add(sendButton, BorderLayout.EAST);
-		box.add( messagePanel);
-
-		box.add( Box.createVerticalGlue());
 		
+		// Create the text-field where can be written the message to
+		// be sent to the centre side of the message panel in the
+		// main layout of this Multicast Chat's Client-Side Service
+		this.messageToBeSentField = new JTextField();
 		
-		JPanel filePanel = new JPanel(new BorderLayout());
-
-		filePanel.add(new JLabel("Not used"), BorderLayout.WEST);
-		fileField = new JTextField();
-		fileField.addActionListener( new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			downloadFile();
+		// Add an Event Listener to the text-field where can be written the
+		// message to be sent to the centre side of the message panel in the
+		// main layout of this Multicast Chat's Client-Side Service
+		this.messageToBeSentField.addActionListener(new ActionListener() {
+			
+			/**
+			 * Action to be performed related to the text-field
+			 * where the message to be send can be written
+			 */
+			public void actionPerformed(ActionEvent dummyMessageToBeSentFieldEvent) {
+				// The process of send the message through this
+				// Multicast Chat's Client-Side Service 
+				sendMessage();
 			}
-			});
-		filePanel.add(fileField, BorderLayout.CENTER);
-
-		JButton downloadButton = new JButton("Not Implemented");
-		downloadButton.addActionListener( new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		downloadFile();
-		}
 		});
-		filePanel.add(downloadButton, BorderLayout.EAST);
-		box.add( filePanel);
 		
-		box.add( Box.createVerticalGlue());
+		// Add the text-field where can be written the message to
+		// be sent to the centre side of the message panel in the
+		// main layout of this Multicast Chat's Client-Side Service
+		messagePanel.add(this.messageToBeSentField, BorderLayout.CENTER);
+		
+		// Create the label for the SEND button when it's pressed
+		// for send the messages and added to the centre side of
+		// the message panel in the main layout of this
+		// Multicast Chat's Client-Side Service
+		JButton sendButton = new JButton("SEND");
+				
+		// Add an Event Listener to the SEND button when it's pressed
+		// for send the messages to be sent to the centre side of
+		// the message panel in the main layout of this
+		// Multicast Chat's Client-Side Service
+		sendButton.addActionListener(new ActionListener() {
+			
+			/**
+			 * Action to be performed related to the button
+			 * where the message to be send can be written.
+			 */
+			public void actionPerformed(ActionEvent sendButtonPressedEvent) {
+				// The process of send the message through this
+				// Multicast Chat's Client-Side Service 
+				sendMessage();
+			}
+		});
+		
+		// Add the text-field where can be written the message to
+		// be sent to the right side of the message panel in the
+		// main layout of this Multicast Chat's Client-Side Service
+		messagePanel.add(sendButton, BorderLayout.EAST);
+		
+		// Add the panel of where the messages will be
+		// processed and all the related operations occur in
+		// the main layout of the Multicast Chat's Client-Side Service
+		mainLayoutBox.add(messagePanel);
+		mainLayoutBox.add(Box.createVerticalGlue());
+		
+		// Create the panel where the file can be download in the
+		// main layout of this Multicast Chat's Client-Side Service
+		JPanel fileToBeDownloadPanel = new JPanel(new BorderLayout());
+		
+		// Add the label in the right side to the panel where the file can be
+		// download in the main layout of this Multicast Chat's Client-Side Service
+		fileToBeDownloadPanel.add(new JLabel("Not used"), BorderLayout.WEST);
+		
+		// Create a text-field related to the title of the file to be download,
+		// through the Multicast Chat's Client-Side Service
+		this.fileToBeDownloadTextField = new JTextField();
+		
+		// Add an Event Listener to the text-field related to the
+		// title of the file to be download in through the
+		// Multicast Chat's Client-Side Service
+		this.fileToBeDownloadTextField.addActionListener(new ActionListener() {
+			
+			/**
+			 * Action to be performed related to the text-field
+			 * where the title of the file to be download can be viewed.
+			 */
+			public void actionPerformed(ActionEvent dummFileToBeDownloadedFieldEvent) {
+				// The process of send the message through this
+				// Multicast Chat's Client-Side Service 
+				downloadFile();
+			}
+		});
+		
+		// Add the text-field related to the title of the file to be download,
+		// to the centre side of the panel of the file to be download in the
+		// main layout of this Multicast Chat's Client-Side Service
+		fileToBeDownloadPanel.add(this.fileToBeDownloadTextField, BorderLayout.CENTER);
+
+		// Create the button that can be pressed when it's pretended
+		// to download a file in this Multicast Chat's Client-Side Service
+		JButton downloadButton = new JButton("Not Implemented");
+		
+		downloadButton.addActionListener( new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				downloadFile();
+			}
+		});
+		
+		fileToBeDownloadPanel.add(downloadButton, BorderLayout.EAST);
+		mainLayoutBox.add(fileToBeDownloadPanel);
+		
+		mainLayoutBox.add(Box.createVerticalGlue());
 		
 
-		getContentPane().add(box, BorderLayout.SOUTH);
+		getContentPane().add(mainLayoutBox, BorderLayout.SOUTH);
 
 		// detect window closing and terminate multicast chat session
 		// detectar o fecho da janela no termino de uma sessao de chat    // 
-		addWindowListener( new WindowAdapter() {
+		addWindowListener(new WindowAdapter() {
+		
 			// Invocado na primeira vez que a janela e tornada visivel.
 			public void windowOpened(WindowEvent e) {
 				messageToBeSentField.requestFocus();
 			} 
+			
 			// terminar o char a quando do fecho da janela
 			public void windowClosing(WindowEvent e) {
 				onQuit();
 				dispose();
-			} 
+			}
+			
+			/**
+			 * Close this Multicast Chat's 
+			 */
 			public void windowClosed(WindowEvent e) {
 				System.exit(0);
 			} 
-			});
+		});
 	}
 	
 	/**
@@ -226,25 +340,39 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	}
 	
 	// Configuracao do grupo multicast da sessao de chat na interface do cliente
+	/**
+	 * Configure the 
+	 * 
+	 * @param username
+	 * @param group
+	 * @param port
+	 * @param timeToLive
+	 * 
+	 * @throws IOException
+	 */
 	public void join(String username, InetAddress group, int port, 
-					 int ttl) throws IOException {
-		setTitle("CHAT MulticastIP " + username + "@" + group.getHostAddress() 
-				 + ":" + port + " [TTL=" + ttl + "]");
-
-
+					 int timeToLive) throws IOException {
 		
-		// Criar sessao de chat multicast
-		chat = new MulticastChat(username, group, port, ttl, this);
-	} 
+		setTitle("CHAT Multicast IP " + username + "@" + group.getHostAddress() 
+				 + ":" + port + " [TTL=" + timeToLive + "]");
 
+		// Criar sessao de chat multicast
+		chat = new MulticastChat(username, group, port, timeToLive, this);
+	} 
+	
+	/**
+	 * 
+	 * 
+	 * @param message
+	 */
 	protected void log(final String message) {
-		java.util.Date date = new java.util.Date();
+		Date date = new Date();
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-			conversationMessagesTextArea.append(message + "\n");
+				conversationMessagesTextArea.append(message + "\n");
 			} 
-			});
+		});
 	} 
 
 	/**
@@ -253,9 +381,12 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	 * Executa operacoes relacionadas com interface -- nao modificar
 	 */
 	protected void sendMessage() {
-		String message = messageToBeSentField.getText();
+		String messageToBeSent = messageToBeSentField.getText();
 		messageToBeSentField.setText("");
-		doSendMessage( message);
+		
+		// Send the message through the Multicast Chat's Client-Side Service,
+		// previously written in the 
+		doSendMessage(messageToBeSent);
 		messageToBeSentField.requestFocus();
 	}
 
@@ -296,14 +427,26 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	 * na linha de download. 
 	 * Executa operacoes relacionadas com interface -- nao modificar
 	 */
+	
+	/**
+	 * Ask for the download of a file.
+	 * This method/function it's called when the
+	 * SEND button or the 'ENTER' key in the user's keyboard is pressed.
+	 */
 	protected void downloadFile() {
-		final String file = fileField.getText();
-		fileField.setText("");
-		new Thread( new Runnable() {
+		final String file = fileToBeDownloadTextField.getText();
+		fileToBeDownloadTextField.setText("");
+		
+		// Initialise the Thread responsible for the download and
+		// all the respectively transfer process
+		new Thread(new Runnable() {
+			
+			// Start the Thread previously explained
 			public void run() {
-				doDownloadFile( file);
+				doDownloadFile(file);
 			}
-			}).start();
+		}).start();
+		
 		messageToBeSentField.requestFocus();
 	}
 
@@ -321,20 +464,27 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	/**
 	 * Chamado quando o utilizador fechou a janela do chat
 	 */
+	
+	/**
+	 * 
+	 */
 	protected void onQuit() {
 		try {
-			if (chat != null) {
+			if(chat != null)
 				chat.terminateService();
-			} 
-		} catch (Throwable ex) {
+		}
+		catch (Throwable ex) {
 			JOptionPane.showMessageDialog(this, "Erro no termino do chat:  "
 										  + ex.getMessage(), "ERRO no Chat", 
 										 JOptionPane.ERROR_MESSAGE);
 		} 
 	} 
 
-
 	// Invocado quando s erecebe uma mensagem  // 
+	
+	/**
+	 * 
+	 */
 	public void chatMessageReceived(String username, InetAddress address, 
 									int port, String message) {
 		log("MSG:[" + username+"@"+address.getHostName() + "] disse: " + message);
