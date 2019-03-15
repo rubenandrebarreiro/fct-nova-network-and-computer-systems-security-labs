@@ -6,7 +6,7 @@
 ***
 
 ## Current Status
-[![contributor for this repository](https://img.shields.io/badge/contributor-henrique&nbsp;joao&nbsp;domingos-blue.svg)](http://asc.di.fct.unl.pt/~hj/) [![contributor for this repository](https://img.shields.io/badge/contributor-rubenandrebarreiro-blue.svg)](https://github.com/rubenandrebarreiro/) [![developed in](https://img.shields.io/badge/developed&nbsp;in-fct&nbsp;nova-blue.svg)](https://www.fe.up.pt/)
+[![contributor for this repository](https://img.shields.io/badge/contributor-henrique&nbsp;joao&nbsp;domingos-blue.svg)](http://asc.di.fct.unl.pt/~hj/) [![contributor for this repository](https://img.shields.io/badge/contributor-rubenandrebarreiro-blue.svg)](https://github.com/rubenandrebarreiro/) [![contributor for this repository](https://img.shields.io/badge/contributor-vice2al-blue.svg)](https://github.com/vice2al/) [![developed in](https://img.shields.io/badge/developed&nbsp;in-fct&nbsp;nova-blue.svg)](https://www.fct.unl.pt/)
 [![current version](https://img.shields.io/badge/version-1.0-magenta.svg)](https://github.com/rubenandrebarreiro/fct-nova-network-and-computer-systems-security-labs/)
 
 [![status of this version no. 1](https://img.shields.io/badge/status-not&nbsp;completed-orange.svg)](https://github.com/rubenandrebarreiro/fct-nova-network-and-computer-systems-security-labs/)
@@ -92,6 +92,7 @@ git clone git@github.com:rubenandrebarreiro/fct-nova-network-and-computer-system
 
 > [Rúben André Barreiro](https://github.com/rubenandrebarreiro/)
 
+> [Vicente Alves Almeida](https://github.com/vice2al/)
 
 ## Contacts
 
@@ -106,6 +107,10 @@ git clone git@github.com:rubenandrebarreiro/fct-nova-network-and-computer-system
 * [up201808917@fe.up.pt](mailto:up201808917@fe.up.pt)
 * [up201808917@g.uporto.pt](mailto:up201808917@g.uporto.pt)
 
+### Vicente Alves Almeida
+#### E-mails
+* [vo.almeida@campus.fct.unl.pt](mailto:vo.almeida@campus.fct.unl.pt)
+
 ## Portfolios/Blogs and Git Hosting/Repository Services
 
 ### Rúben André Barreiro
@@ -116,4 +121,9 @@ git clone git@github.com:rubenandrebarreiro/fct-nova-network-and-computer-system
 * [https://github.com/rubenandrebarreiro/](https://github.com/rubenandrebarreiro/)
 * [https://gitlab.com/rubenandrebarreiro/](https://gitlab.com/rubenandrebarreiro/)
 * [https://bitbucket.org/rubenandrebarreiro/](https://bitbucket.org/rubenandrebarreiro/)
+
+### Vicente Alves Almeida
+#### Hosting/Repository Services
+* [https://github.com/vice2al/](https://github.com/viceal/)
+* [https://bitbucket.org/vice2al/](https://bitbucket.org/vice2al/)
 
