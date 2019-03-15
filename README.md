@@ -20,10 +20,9 @@
 [![keyword of this version no. 4](https://img.shields.io/badge/keyword-cryptography-brown.svg)](https://github.com/rubenandrebarreiro/fct-nova-network-and-computer-systems-security-labs/)
 
 
-[![technology used no. 1](https://img.shields.io/badge/built&nbsp;with-java-red.svg)](https://www.java.com/) [![technology used no. 2](https://img.shields.io/badge/built&nbsp;with-jade-red.svg)](http://jade.tilab.com/)
-[![software used no. 1](https://img.shields.io/badge/software-rapid&nbsp;miner&nbsp;studio-gold.svg)](https://rapidminer.com/products/studio/)
-[![software used no. 2](https://img.shields.io/badge/software-eclipse&nbsp;ide-gold.svg)](https://www.eclipse.org/)
-[![software used no. 3](https://img.shields.io/badge/software-jetbrains&nbsp;intellij&nbsp;idea-gold.svg)](https://www.jetbrains.com/idea/)
+[![technology used no. 1](https://img.shields.io/badge/built&nbsp;with-java-red.svg)](https://www.java.com/) 
+[![software used no. 1](https://img.shields.io/badge/software-eclipse&nbsp;ide-gold.svg)](https://www.eclipse.org/)
+[![software used no. 2](https://img.shields.io/badge/software-jetbrains&nbsp;intellij&nbsp;idea-gold.svg)](https://www.jetbrains.com/idea/)
 
 [![star this repository](http://githubbadges.com/star.svg?user=rubenandrebarreiro&repo=fct-nova-network-and-computer-systems-security-labs&style=flat)](https://github.com/rubenandrebarreiro/fct-nova-network-and-computer-systems-security-labs/stargazers)
 [![fork this repository](http://githubbadges.com/fork.svg?user=rubenandrebarreiro&repo=fct-nova-network-and-computer-systems-security-labs&style=flat)](https://github.com/rubenandrebarreiro/fct-nova-network-and-computer-systems-security-labs/fork)
