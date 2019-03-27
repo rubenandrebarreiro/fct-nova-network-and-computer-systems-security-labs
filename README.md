@@ -25,10 +25,12 @@
 
 [![software used no. 1](https://img.shields.io/badge/software-eclipse&nbsp;ide-gold.svg)](https://www.eclipse.org/)
 [![software used no. 2](https://img.shields.io/badge/software-jetbrains&nbsp;intellij&nbsp;idea-gold.svg)](https://www.jetbrains.com/idea/)
+
 [![software used no. 3](https://img.shields.io/badge/software-dockers&nbsp;community&nbsp;edition-gold.svg)](https://www.docker.com/)
 [![software used no. 4](https://img.shields.io/badge/software-wireshark-gold.svg)](https://www.wireshark.org/)
 [![software used no. 5](https://img.shields.io/badge/software-openssl-gold.svg)](https://www.openssl.org/)
 [![software used no. 6](https://img.shields.io/badge/software-bouncy&nbsp;castle&nbsp;api-gold.svg)](https://www.bouncycastle.org/)
+
 [![software used no. 7](https://img.shields.io/badge/software-openstego-gold.svg)](https://www.openstego.com/)
 [![software used no. 8](https://img.shields.io/badge/software-stegosuite-gold.svg)](https://stegosuite.org/)
 [![software used no. 9](https://img.shields.io/badge/software-md5&nbsp;collision&nbsp;demo-gold.svg)](https://www.mathstat.dal.ca/~selinger/md5collision/)
