@@ -84,8 +84,18 @@ git clone git@github.com:rubenandrebarreiro/fct-nova-network-and-computer-system
 
 ## Built with
 * [**_Java_**](https://www.java.com/)
+* [**_C_**](https://en.wikipedia.org/wiki/C_(programming_language))
 * [**_Eclipse IDE 2018-12_**](https://www.eclipse.org/)
 * [**_JetBrains IntelliJ IDEA_**](https://www.jetbrains.com/idea/)
+* [**_Docker (Community Edition)_**](https://www.docker.com/)
+* [**_WireShark_**](https://www.wireshark.org/)
+* [**_OpenSSL_**](https://www.openssl.org/)
+* [**_The Legion of the Bouncy Castle (Java/JRE Cryptography APIs)_**](https://www.bouncycastle.org/)
+* [**_OpenStego_**](https://www.openstego.com/)
+* [**_StegoSuite_**](https://stegosuite.org/)
+* [**_MD5 Collision Demo & Evilize Tool_**](https://www.mathstat.dal.ca/~selinger/md5collision/)
+* [**_Sheep-Wolf (Wolves Among the Sheep)_**](https://github.com/silentsignal/sheep-wolf)
+* [**_HashClash (Project HashClash - MD5 & SHA-1 Cryptanalysis)_**](https://github.com/cr-marcstevens/hashclash) by [**_Technische Universiteit Eindhoven (TU/e)_**](https://www.tue.nl/en/)
 
 ## Contributors
 > [Henrique João Domingos (Professor)](http://asc.di.fct.unl.pt/~hj/)
