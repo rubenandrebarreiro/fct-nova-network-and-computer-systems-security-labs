@@ -13,6 +13,7 @@ package application.mychat;
  * 
  * Adapted by:
  * @author Ruben Andre Barreiro - r.barreiro@campus.fct.unl.pt
+ * @author Vicente Alves Almeida - vo.almeida@campus.fct.unl.pt
  *
  */
 
