@@ -25,15 +25,15 @@ import java.security.Security;
  * Class responsible for the Simple Provider Test.
  * 
  * Description:
- * - A simple class and respecively program, that only verify/check if,
- *   some Security Provider it's currently installed in the current computer/machine or not;
+ * - A simple class and respectively program, that only verify/check if,
+ *   some Security/Crypto Provider it's currently installed in
+ *   the current computer/machine or not;
  *   
  * - Examples:
  *   a) SunJCE - Sun;
  *   b) BC;
  *   
  *   ... among others!
- *  
  */
 public class SimpleProviderTest {
     public static void main(String[] args) {
@@ -48,10 +48,14 @@ public class SimpleProviderTest {
     	System.out.println("----------------------------");
         
         // The list of Security/Crypto Providers, which it's pretended if are installed or not
+    	// 
+    	// Currently testing:
+    	// a) SunJCE
+    	// b) BC (Bouncy Castle)
         String[] providerNames = {"SunJCE", "BC"};
         
-        // Verify/check if the SunJCE and BC (Bouncy Castle) Security Providers
-        // are installed or not
+        // Verify/check if the SunJCE and BC (Bouncy Castle) Security/Crypto Providers
+        // are installed or not (it's possible to be added more Security/Crytpo Providers)
         // 
         // NOTE:
         // - It's possible to add more Security/Crypto Providers,
