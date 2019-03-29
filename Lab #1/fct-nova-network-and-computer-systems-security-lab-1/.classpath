@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="Bouncy-Castle-Provider-API/bcprov-ext-jdk15on-161.jar"/>
 	<classpathentry kind="lib" path="Bouncy-Castle-Provider-API/bctest-jdk15on-161.jar"/>
 	<classpathentry kind="lib" path="Bouncy-Castle-Provider-API/bctls-jdk15on-161.jar"/>
+	<classpathentry kind="lib" path="Bouncy-Castle-Provider-API/bcprov-debug-jdk15on-161.jar"/>
+	<classpathentry kind="lib" path="Bouncy-Castle-Provider-API/bcprov-ext-debug-jdk15on-161.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
