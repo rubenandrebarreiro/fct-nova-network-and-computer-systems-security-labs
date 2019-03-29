@@ -48,9 +48,9 @@ public class PrecedenceAndSpecificationProviderTest {
         // In this case, will not be specified what Security/Crypto Provider will be used
         // So, it will be used the Security/Crypto Provider by default
         // (Probably, the SunJCE Security/Crypto Provider)
-        Cipher cipher = Cipher.getInstance("Blowfish/ECB/NoPadding");
+        Cipher cipherText = Cipher.getInstance("Blowfish/ECB/NoPadding");
         System.out.println("First Security/Crypto Provider by default and, using this cipher: " 
-        				   + cipher.getProvider());
+        				   + cipherText.getProvider());
         
         System.out.println("--------------------------------------------------------------------------------------------");
         
@@ -65,9 +65,9 @@ public class PrecedenceAndSpecificationProviderTest {
         // To do that, it's only necessary to add the Security/Crypto Provider as
         // the following argument of the initialisation of the cipher
         // (example: BC, for the Bouncy Castle Security/Crypto Provider's API) 
-        cipher = Cipher.getInstance("Blowfish/ECB/NoPadding", "BC");
+        cipherText = Cipher.getInstance("Blowfish/ECB/NoPadding", "BC");
         System.out.println("The pretended and defined Security/Crypto Provider, using this cipher: "
-                           + cipher.getProvider());
+                           + cipherText.getProvider());
         
         System.out.println("--------------------------------------------------------------------------------------------");
     }
