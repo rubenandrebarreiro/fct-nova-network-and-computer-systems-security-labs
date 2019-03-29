@@ -1,6 +1,7 @@
 package application.mychat;
 
 /**
+ * 
  * Network and Computer Systems Security
  * 
  * Practical Lab #1.
@@ -23,39 +24,51 @@ import java.net.*;
 /**
  * Class responsible for the Multicast Chat in the Client-Side Application,
  * extending the Java's Thread.
+ * 
+ * Description:
+ * - A Multicast Chat program which accepts the entry of new Clients,
+ *   which use the JOIN operation and may accepts, also,
+ *   the leave of the same Clients which use the LEAVE operation.
+ *   This Multicast Chat program can also, accept the exchange of,
+ *   simple and normal messages between the Clients,   
+ *   by using the MESSAGE operations;
+ * 
  */
 public class MulticastChat extends Thread {
 	
 	// Constants/Invariants:
 
 	/**
-	 * The number of the JOIN operation to the Multicast Chat's Service.
+	 * The number of the JOIN operation to the Multicast Chat's Service
 	 */
 	public static final int JOIN = 1;
 
 	/**
-	 * The number of the LEAVE operation to the Multicast Chat's Service.
+	 * The number of the LEAVE operation to the Multicast Chat's Service
 	 */
 	public static final int LEAVE = 2;
 
 	/**
-	 * The number of a simple/basic processing MESSAGE operation to the Multicast Chat's Service.
+	 * The number of a simple/basic processing MESSAGE operation to 
+	 * the Multicast Chat's Service
 	 */
 	public static final int MESSAGE = 3;
 	
 	/**
-	 * The magic number that works like an unique ID of the Multicast Chat's Service.
+	 * The magic number that works like an unique ID of the Multicast Chat's Service
 	 */
 	public static final long CHAT_MAGIC_NUMBER = 4969756929653643804L;
 	
 	/**
-	 * The time (in milliseconds) to test the pooling of termination of the Socket used in the Multicast Chat's Service.
+	 * The time (in milliseconds) to test the pooling of termination of
+	 * the Socket used in the Multicast Chat's Service
+	 * 
 	 * NOTE: Currently using a time of 5 seconds (5000 milliseconds)
 	 */
 	public static final int DEFAULT_SOCKET_TIMEOUT_MILLIS = 5000;
 	
 	/**
-	 * The length of the packet of the messages that is allowed to be received.
+	 * The length of the packet of the messages that is allowed to be received
 	 */
 	public static final int MESSAGE_PACKET_LENGTH = 65508;
 	
@@ -63,30 +76,32 @@ public class MulticastChat extends Thread {
 	// Global Instance Variables:
 	
 	/**
-	 * The Multicast's Socket used to send and receive Multicast's Protocol PDUs.
+	 * The Multicast's Socket used to send and receive Multicast's Protocol PDUs
+	 * 
 	 * This Multicast's Socket is used to send and receive messages in the scope of
-	 * the related operations that can occur in the Chat's Service.
+	 * the related operations that can occur in the Chat's Service
 	 */
 	protected MulticastSocket multicastSocket;
 	
 	/**
-	 * The Username used by the host/user (client) of the Multicast Chat's Service.
+	 * The Username used by the host/user (Client) of the Multicast Chat's Service
 	 */
 	protected String username;
 	
 	/**
-	 * The IP Group used by this Multicast Chat's Service, that the host/user (client) pretends to join.
+	 * The IP Group used by this Multicast Chat's Service,
+	 * that the host/user (Client) pretends to JOIN
 	 */
 	protected InetAddress multicastIPGroup;
 	
 	/**
-	 * The Event Listener to catch events sent through the Multicast Chat's Service.
+	 * The Event Listener to catch events sent through the Multicast Chat's Service
 	 */
 	protected MulticastChatEventListener eventListener;
 	
 	/**
 	 * The boolean value too keep information about if the Multicast Chat's Service
-	 * it's currently active or not.
+	 * it's currently active or not
 	 */
 	protected boolean isActive;
 
@@ -94,11 +109,13 @@ public class MulticastChat extends Thread {
 	// Constructors:
 
 	/**
+	 * Constructor #1:
 	 * 
+	 * Constructor the Multicast Chat in the Client-Side Application.
 	 * 
-	 * @param username the Username used by the host/user (client) of the Multicast Chat's Service
+	 * @param username the Username used by the host/user (Client) of the Multicast Chat's Service
 	 * @param multicastIPGroup the IP Group used by this Multicast Chat's Service,
-	 * 		  that the host/user (client) pretends to join
+	 * 		  that the host/user (Client) pretends to join
 	 * @param port the port to communicate in this Multicast Chat's Service
 	 * @param timeToLive the Time To Live (TTL) associated to this Multicast Chat's Service
 	 * @param eventListener the Event Listener to catch events sent through the Multicast Chat's Service
@@ -128,13 +145,12 @@ public class MulticastChat extends Thread {
 	
 	// Methods/Functions:
 	
-	
 	// 1) Some basic methods:
 	
 	/**
 	 * Request an asynchronous termination of the execution's thread of the Multicast Chat's Service.
 	 * 
-	 * @throws IOException an Input/Output Exception to be thrown
+	 * @throws IOException an Input/Output Exception to be thrown, in the case of, an anomaly occurs
 	 */
 	public void terminateService() throws IOException {
 		this.isActive = false;
@@ -158,7 +174,7 @@ public class MulticastChat extends Thread {
 	/**
 	 * Send a JOIN message through the Multicast Chat's Service, to the other Event Listeners.
 	 * 
-	 * @throws IOException an Input/Output Exception to be thrown
+	 * @throws IOException an Input/Output Exception to be thrown, in the case of, an anomaly occurs
 	 */
 	protected void sendJoinMessage() throws IOException {
 		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
@@ -184,7 +200,7 @@ public class MulticastChat extends Thread {
 	 * @param address the address to where the JOIN message will be sent
 	 * @param port the port used for do the exchange of messages in this communication
 	 * 
-	 * @throws IOException an Input/Output Exception to be thrown
+	 * @throws IOException an Input/Output Exception to be thrown, in the case of, an anomaly occurs
 	 */
 	protected void processJoinMessage(DataInputStream dataInputStream, InetAddress address, int port) throws IOException {
 		String name = dataInputStream.readUTF();
@@ -198,7 +214,7 @@ public class MulticastChat extends Thread {
 	/**
 	 * Send a LEAVE message through the Multicast Chat's Service, to the other Event Listeners.
 	 * 
-	 * @throws IOException an Input/Output Exception to be thrown
+	 * @throws IOException an Input/Output Exception to be thrown, in the case of, an anomaly occurs
 	 */
 	protected void sendLeaveMessage() throws IOException {
 
@@ -223,7 +239,7 @@ public class MulticastChat extends Thread {
 	 * @param address the address to where the JOIN message will be sent
 	 * @param port the port used for do the exchange of messages in this communication
 	 * 
-	 * @throws IOException an Input/Output Exception to be thrown
+	 * @throws IOException an Input/Output Exception to be thrown, in the case of, an anomaly occurs
 	 */
 	protected void processLeaveMessage(DataInputStream istream, InetAddress address, int port) throws IOException {
 		String username = istream.readUTF();
@@ -239,7 +255,7 @@ public class MulticastChat extends Thread {
 	 * 
 	 * @param message the message pretended to be sent through the Multicast Chat's Service
 	 * 
-	 * @throws IOException an Input/Output Exception to be thrown
+	 * @throws IOException an Input/Output Exception to be thrown, in the case of, an anomaly occurs
 	 */
 	public void sendNormalMessage(String message) throws IOException {
 
@@ -267,7 +283,7 @@ public class MulticastChat extends Thread {
 	 * @param address the address to where the JOIN message will be sent
 	 * @param port the port used for do the exchange of messages in this communication
 	 * 
-	 * @throws IOException an Input/Output Exception to be thrown
+	 * @throws IOException an Input/Output Exception to be thrown, in the case of, an anomaly occurs
 	 */
   	protected void processNormalMessage(DataInputStream dataInputStream, InetAddress address, int port) throws IOException {
   		
@@ -281,12 +297,15 @@ public class MulticastChat extends Thread {
   	}
   	
   	/**
-  	 * The main process of this Multicast Chat's Service. This service, since the moment that it's started,
-  	 * starts waiting the receive of messages using the Multicast communication associated to this Service,
-  	 * accordingly to the IP Group used by this Multicast Chat's Service.
+  	 * The main process of this Multicast Chat's Service.
+  	 * This service, since the moment that it's started,
+  	 * starts waiting the receive of messages using the Multicast communication
+  	 * associated to this Service, accordingly to the IP Group used by
+  	 * this Multicast Chat's Service.
   	 * 
-  	 * Every time that a message is received, this process will de-multiplex the Datagram associated to the message receive,
-  	 * accordingly to the operations and messages defined and allowed by this Service.
+  	 * Every time that a message is received, this process will de-multiplex the
+  	 * Datagram associated to the message receive, accordingly to the
+  	 * operations and messages defined and allowed by this Service.
   	 */
   	public void run() {
   		
@@ -307,7 +326,7 @@ public class MulticastChat extends Thread {
 
   				long magicNumber = dataInputStream.readLong();
 
-  				// Only continues all the entire process if the Magic Numbers are different TODO
+  				// Only continues all the entire process if the Magic Numbers are different
   				if(magicNumber != CHAT_MAGIC_NUMBER)
   					continue;
     		
@@ -330,11 +349,7 @@ public class MulticastChat extends Thread {
   				}
   			}
   			catch (InterruptedIOException interruptedIOException) {
-  				/**
-  				 * TODO
-  				 * O timeout e usado apenas para forcar um loopback e testar unknown
-  				 * o valor isActive 
-  				 */	 
+  				// The timeout used it's just to force a loop-back and test unknown operations
   			}
   			catch (Throwable errorMessage) {
   				this.printErrorMessage("Processing error: " + errorMessage.getClass().getName() + ": " 
@@ -345,6 +360,8 @@ public class MulticastChat extends Thread {
   			// Close the connection through the socket of the Multicast Chat's Service
   			this.multicastSocket.close();
   		}
-  		catch (Throwable e) {}
+  		catch (Throwable e) {
+  			// Empty process
+  		}
   	} 
 }

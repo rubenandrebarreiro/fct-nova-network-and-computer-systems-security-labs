@@ -1,6 +1,7 @@
 package application.mychat;
 
 /**
+ * 
  * Network and Computer Systems Security
  * 
  * Practical Lab #1.
@@ -31,20 +32,20 @@ public interface MulticastChatEventListener extends EventListener {
   /**
    * Invoked when a Multicast chat message in Client-Side Application has been received.
    * 	
-   * @param username the username of the host/user (client)
-   * @param host the address of the host/user (client)
-   * @param port the port used by host/the user (client) to communicate, send/receive messages,
+   * @param username the username of the host/user (Client)
+   * @param host the address of the host/user (Client)
+   * @param port the port used by host/the user (Client) to communicate, send/receive messages,
    * 		join and/or left
-   * @param message the message received by the user (client)
+   * @param message the message received by the user (Client)
    */
   void chatMessageReceived(String username, InetAddress host, int port, String message);
 
   /**
    * Invoked when a Multicast participant in Client-Side Application has joined.
    * 
-   * @param username the username of the host/user (client)
-   * @param host the address of the host/user (client)
-   * @param port the port used by the host/user (client) to communicate, send/receive messages,
+   * @param username the username of the host/user (Client)
+   * @param host the address of the host/user (Client)
+   * @param port the port used by the host/user (Client) to communicate, send/receive messages,
    * 		join and/or left
    */
   void chatParticipantJoined(String username, InetAddress host, int port);
@@ -52,9 +53,9 @@ public interface MulticastChatEventListener extends EventListener {
   /**
    * Invoked when a Multicast participant in Client-Side Application has left.
    * 
-   * @param username the username of the host/user (client)
-   * @param host the address of the host/user (client)
-   * @param port the port used by the host/user (client) to communicate, send/receive messages,
+   * @param username the username of the host/user (Client)
+   * @param host the address of the host/user (Client)
+   * @param port the port used by the host/user (Client) to communicate, send/receive messages,
    * 		join and/or left the chat
    */
   void chatParticipantLeft(String username, InetAddress host, int port);

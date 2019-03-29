@@ -1,6 +1,7 @@
 package application.capitalisation;
 
 /**
+ * 
  * Network and Computer Systems Security
  * 
  * Practical Lab #1.
@@ -35,37 +36,39 @@ import javax.swing.JTextField;
  * Class responsible for the Capitalise Client-Side Application.
  * 
  * Description:
- * - A simple Swing-Based client for the capitalisation server.
- *   It has a main frame window with a text field for entering
- *   strings and a text-area to see the results of capitalising
- *   them.
+ * - A simple Swing-Based Client for the
+ *   Capitalisation Server Application. It has a main frame window with
+ *   a text field for entering strings and a text-area to see the
+ *   results of capitalising them;
  */
 public class CapitaliseClient {
 
 	// Global Instance Variables:
 	
 	/**
-	 * The Buffered Reader to be used in Input Stream of the Socket.
+	 * The Buffered Reader to be used in Input Stream of the Socket
 	 */
     private BufferedReader in;
     
     /**
-     * The Print Writer to be used in Output Stream of the Socket.
+     * The Print Writer to be used in Output Stream of the Socket
      */
     private PrintWriter out;
     
     /**
-     * The frame of the window of the Graphics User Interface (GUI).
+     * The frame of the window of the Graphics User Interface (GUI)
      */
     private JFrame frame = new JFrame("Capitalise Client");
     
     /**
-     * The text-field related to the data field to be used in the layout of the Graphics User Interface (GUI).
+     * The text-field related to the data field to be
+     * used in the layout of the Graphics User Interface (GUI)
      */
     private JTextField dataField = new JTextField(40);
 
     /**
-     * The text-area related to the message area to be used in the layout of the Graphics User Interface (GUI).
+     * The text-area related to the message area to be 
+     * used in the layout of the Graphics User Interface (GUI)
      */
     private JTextArea messageArea = new JTextArea(8, 60);
 
@@ -75,9 +78,9 @@ public class CapitaliseClient {
     /**
      * Constructor #1:
      * 
-     * Construct the client by laying out the Graphics User Interface (GUI) and
+     * Construct the Client by laying out the Graphics User Interface (GUI) and
      * registering a listener with the text-field so that pressing Enter in the
-     * listener sends the text-field contents to the server.
+     * listener sends the text-field contents to the Server;
      */
     public CapitaliseClient() {
 
@@ -88,17 +91,17 @@ public class CapitaliseClient {
 
         /**
          * Add the listeners to the Graphics User Interface (GUI) layout,
-         * most precisely to the text-field related to the data field.
+         * most precisely to the text-field related to the data field
          */
         dataField.addActionListener(new ActionListener() {
 		
 	        /**
 			 * Respond to pressing the enter key in the text-field
 			 * by sending the contents of the text field to the
-			 * server and displaying the response from the server
+			 * Server and displaying the response from the Server
 			 * in the text area. If the response is "." we exit
 			 * the whole application, which closes all sockets,
-			 * streams and windows.
+			 * Streams and windows
 			 */
 			public void actionPerformed(ActionEvent e) {
 			    out.println(dataField.getText());
@@ -118,13 +121,21 @@ public class CapitaliseClient {
 			}
 	    });
     }
-
+    
+    
+    // Methods/Functions:
+	
+ 	// 1) Some basic methods:
+    
     /**
      * Implement the connection logic by prompting the end user for
-     * the server's IP address, connecting, setting up streams, and
-     * consuming the welcome messages from the server. The Capitaliser
-     * protocol says that the server sends three lines of text to the
-     * client immediately after establishing a connection.
+     * the Server's IP address, connecting, setting up Streams, and
+     * consuming the welcome messages from the Server. The Capitaliser
+     * protocol says that the Server sends three lines of text to the
+     * Client immediately after establishing a connection
+     * 
+     * @throws IOException an Input/Output exception to be thrown, in the case of,
+     *         occurred in the processing of Input/Output Streams
      */
     public void connectToServer() throws IOException {
 
@@ -135,22 +146,27 @@ public class CapitaliseClient {
 							   "Welcome to the Capitalisation Program",
 							   JOptionPane.QUESTION_MESSAGE);
 
-        // Make connection and initialise streams
+        // Make connection and initialise Streams
         @SuppressWarnings("resource")
 		Socket socket = new Socket(serverAddress, 9898);
         
-        // Initialise and start to use the both input/output streams
+        // Initialise and start to use the both Input/Output Streams
         // to be used during the connection
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
 
-        // Consume the initial welcoming messages from the Server-Side
+        // Consume the initial welcoming messages from the Server-Side Application
         for (int i = 0; i < 3; i++)
             messageArea.append(in.readLine() + "\n");
     }
 
     /**
-     * Runs the Client-Side Application.
+     * Main method. Run the Client-Side Application.
+     * 
+     * @param args the arguments for this main method
+     * 
+     * @throws Exception the exception to be thrown, in the case of,
+     *         occurring an anomaly in the Client-Side Application
      */
     public static void main(String[] args) throws Exception {
         CapitaliseClient client = new CapitaliseClient();
@@ -159,7 +175,7 @@ public class CapitaliseClient {
         client.frame.pack();
         client.frame.setVisible(true);
         
-        // Establish the connection to the Server-Side
+        // Establish the connection to the Server-Side Application
         client.connectToServer();
     }
 }

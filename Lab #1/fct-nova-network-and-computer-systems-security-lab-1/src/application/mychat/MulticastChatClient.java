@@ -1,6 +1,7 @@
 package application.mychat;
 
 /**
+ * 
  * Network and Computer Systems Security
  * 
  * Practical Lab #1.
@@ -32,13 +33,18 @@ import java.util.*;
  * This class implements an interface for a Chat's Session SWING-based
  * and can be improved by the students to fulfil better the various pretended
  * features and improvements of the project.
+ * 
+ * Description:
+ * - The Graphic Interface for the Multicast Chat's Client-Side Service and
+ *   for all the final users using it, where they can communicate between
+ *   with each others.
  */
 public class MulticastChatClient extends JFrame implements MulticastChatEventListener {
 	
 	// Constants/Invariants:
 	
 	/**
-	 * The serial version UID defined for this class.
+	 * The serial version UID defined for this class
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -46,31 +52,31 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	// Global Instance Variables:
 	
 	/**
-	 * The Multicast Chat's class associated to this Multicast Chat's Client-Side Service.
+	 * The Multicast Chat's class associated to this Multicast Chat's Client-Side Service
 	 */
 	protected MulticastChat chat;
 
 	/**
 	 * The text-area where will be showed the messages of the conversation of
 	 * this Multicast Chat's Client-Side Service, including the JOIN message,
-	 * when someone joins to this Multicast Chat.
+	 * when someone joins to this Multicast Chat
 	 */
 	protected JTextArea conversationMessagesTextArea;
 
 	/**
 	 * The text-field where the messages to be sent through the conversation of
-	 * this Multicast Chat's Client-Side Service, can be written before be sent.
+	 * this Multicast Chat's Client-Side Service, can be written before be sent
 	 */
 	protected JTextField messageToBeSentField;
 	
 	/**
-	 * The text-field where can be placed the file to be able to download.
+	 * The text-field where can be placed the file to be able to download
 	 */
 	protected JTextField fileToBeDownloadTextField;
 	
 	/**
-	 * The list hosts/users (clients) currently "online" or active in
-	 * this Multicast Chat's Client-Side Service.
+	 * The list hosts/users (Clients) currently "Connected"/"Online" in
+	 * this Multicast Chat's Client-Side Service
 	 */
 	protected DefaultListModel<String> usersInChat;
 
@@ -81,7 +87,7 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	 * Constructor #1:
 	 * 
 	 * Construct a frame for this Multicast Chat's Client-Side Service
-	 * (initialised in a state of Disconnected).
+	 * (initialised in a state of "Disconnected"/"Offline").
 	 */
 	public MulticastChatClient() {
 		
@@ -99,26 +105,33 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 														 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
 														 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		// Add the Scroll Bar Pane to the center of the main layout of
+		// Add the Scroll Bar Pane to the centre of the main layout of
 		// this Multicast Chat's Client-Side Service
 		getContentPane().add(textAreaScrollPane, BorderLayout.CENTER);
 		
-		// Create the Users' List currently "online" or active to
+		// Create the Users' List currently "Connected"/"Online" to
 		// the main layout of this Multicast Chat's Client-Side Service
 		this.usersInChat = new DefaultListModel<String>();
 		JList<String> usersInChatList = new JList<String>(this.usersInChat);
 		
 		// Set the component of the Scroll Bars Pane of the
-		// Users' List currently "online" or active for
+		// Users' List currently "Connected"/"Online" for
 		// this Multicast Chat's Client-Side Service
 		JScrollPane usersListScrollPane = new JScrollPane(usersInChatList, 
 														  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, 
 														  JScrollPane.HORIZONTAL_SCROLLBAR_NEVER) {
 				
+				// Global Instance Variables:
+			
 				/**
-				 * The default serial version UID.
+				 * The default serial version UID
 				 */
 				private static final long serialVersionUID = 1L;
+				
+				
+				// Methods/Functions:
+				
+				// 1) Some basic methods:
 				
 				/**
 				 * Returns the minimum size of the Scroll Bars Pane.
@@ -151,8 +164,8 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 				}
 		};
 		
-		// Create the Users' List currently "online" or active to
-		// the left side of the main layout of this
+		// Create the Users' List currently "Connected"/"Online" to
+		// the left side of the main layout box of this
 		// Multicast Chat's Client-Side Service
 		getContentPane().add(usersListScrollPane, BorderLayout.WEST);
 
@@ -161,22 +174,22 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 		
 		// Create the panel of where the messages will be
 		// processed and all the related operations occur in
-		// the main layout of the Multicast Chat's Client-Side Service
+		// the main layout box of the Multicast Chat's Client-Side Service
 		JPanel messagePanel = new JPanel(new BorderLayout());
 		
 		// Add the label for the message panel for the text-field
 		// for the messages to be sent can be written on the left side of
-		// the main layout of this Multicast Chat's Client-Side Service
+		// the main layout box of this Multicast Chat's Client-Side Service
 		messagePanel.add(new JLabel("Message:"), BorderLayout.WEST);
 		
 		// Create the text-field where can be written the message to
 		// be sent to the centre side of the message panel in the
-		// main layout of this Multicast Chat's Client-Side Service
+		// main layout box of this Multicast Chat's Client-Side Service
 		this.messageToBeSentField = new JTextField();
 		
 		// Add an Event Listener to the text-field where can be written the
 		// message to be sent to the centre side of the message panel in the
-		// main layout of this Multicast Chat's Client-Side Service
+		// main layout box of this Multicast Chat's Client-Side Service
 		this.messageToBeSentField.addActionListener(new ActionListener() {
 			
 			/**
@@ -192,18 +205,18 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 		
 		// Add the text-field where can be written the message to
 		// be sent to the centre side of the message panel in the
-		// main layout of this Multicast Chat's Client-Side Service
+		// main layout box of this Multicast Chat's Client-Side Service
 		messagePanel.add(this.messageToBeSentField, BorderLayout.CENTER);
 		
 		// Create the label for the SEND button when it's pressed
 		// for send the messages and added to the centre side of
-		// the message panel in the main layout of this
+		// the message panel in the main layout box of this
 		// Multicast Chat's Client-Side Service
 		JButton sendButton = new JButton("SEND");
 				
 		// Add an Event Listener to the SEND button when it's pressed
 		// for send the messages to be sent to the centre side of
-		// the message panel in the main layout of this
+		// the message panel in the main layout box of this
 		// Multicast Chat's Client-Side Service
 		sendButton.addActionListener(new ActionListener() {
 			
@@ -220,21 +233,21 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 		
 		// Add the text-field where can be written the message to
 		// be sent to the right side of the message panel in the
-		// main layout of this Multicast Chat's Client-Side Service
+		// main layout box of this Multicast Chat's Client-Side Service
 		messagePanel.add(sendButton, BorderLayout.EAST);
 		
 		// Add the panel of where the messages will be
 		// processed and all the related operations occur in
-		// the main layout of the Multicast Chat's Client-Side Service
+		// the main layout box of the Multicast Chat's Client-Side Service
 		mainLayoutBox.add(messagePanel);
 		mainLayoutBox.add(Box.createVerticalGlue());
 		
 		// Create the panel where the file can be download in the
-		// main layout of this Multicast Chat's Client-Side Service
+		// main layout box of this Multicast Chat's Client-Side Service
 		JPanel fileToBeDownloadPanel = new JPanel(new BorderLayout());
 		
 		// Add the label in the right side to the panel where the file can be
-		// download in the main layout of this Multicast Chat's Client-Side Service
+		// download in the main layout box of this Multicast Chat's Client-Side Service
 		fileToBeDownloadPanel.add(new JLabel("Not used"), BorderLayout.WEST);
 		
 		// Create a text-field related to the title of the file to be download,
@@ -246,10 +259,8 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 		// Multicast Chat's Client-Side Service
 		this.fileToBeDownloadTextField.addActionListener(new ActionListener() {
 			
-			/**
-			 * Action to be performed related to the text-field
-			 * where the title of the file to be download can be viewed.
-			 */
+			// Action to be performed related to the text-field
+			// where the title of the file to be download can be viewed
 			public void actionPerformed(ActionEvent dummFileToBeDownloadedFieldEvent) {
 				// The process of send the message through this
 				// Multicast Chat's Client-Side Service 
@@ -259,11 +270,12 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 		
 		// Add the text-field related to the title of the file to be download,
 		// to the centre side of the panel of the file to be download in the
-		// main layout of this Multicast Chat's Client-Side Service
+		// main layout box of this Multicast Chat's Client-Side Service
 		fileToBeDownloadPanel.add(this.fileToBeDownloadTextField, BorderLayout.CENTER);
 
 		// Create the button that can be pressed when it's pretended
 		// to download a file in this Multicast Chat's Client-Side Service
+		// (Not implemented)
 		JButton downloadButton = new JButton("Not Implemented");
 		
 		downloadButton.addActionListener( new ActionListener() {
@@ -272,31 +284,50 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 			}
 		});
 		
+		// Add the button related to the download feature of the file to be download,
+		// to the right side of the panel of the file to be download in the
+		// main layout box of this Multicast Chat's Client-Side Service
+		// (Not implemented)
 		fileToBeDownloadPanel.add(downloadButton, BorderLayout.EAST);
-		mainLayoutBox.add(fileToBeDownloadPanel);
 		
+		// Add the panel of the file to be download to the
+		// main layout box of this Multicast Chat's Client-Side Service
+		mainLayoutBox.add(fileToBeDownloadPanel);
+				
+		// Add a vertical glue component to the
+		// main layout of this Multicast Chat's Client-Side Service
 		mainLayoutBox.add(Box.createVerticalGlue());
 		
-
+		// Add the main layout box to the bottom of the Content's Pane
 		getContentPane().add(mainLayoutBox, BorderLayout.SOUTH);
 
-		// detect window closing and terminate multicast chat session
-		// detectar o fecho da janela no termino de uma sessao de chat    // 
+		/**
+		 * Set the window's event listeners for both, opening and closing processes,
+		 * in the start and end of a chat's session
+		 */
 		addWindowListener(new WindowAdapter() {
-		
-			// Invocado na primeira vez que a janela e tornada visivel.
+			
+			/**
+			 * 1st step on opening the Multicast Chat's Client-Side Service:
+			 * - Open the window of this Multicast Chat's Client-Side Service,
+			 *   request a focus on it and make it visible, until be closed
+			 */
 			public void windowOpened(WindowEvent e) {
 				messageToBeSentField.requestFocus();
-			} 
+			}
 			
-			// terminar o char a quando do fecho da janela
+			/**
+			 * 1st step on closing the Multicast Chat's Client-Side Service:
+			 * - Close the window of this Multicast Chat's Client-Side Service
+			 */
 			public void windowClosing(WindowEvent e) {
 				onQuit();
 				dispose();
 			}
 			
 			/**
-			 * Close this Multicast Chat's 
+			 * 2nd step on closing the Multicast Chat's Client-Side Service:
+			 * - Close this Multicast Chat's Client-Side Service completely
 			 */
 			public void windowClosed(WindowEvent e) {
 				System.exit(0);
@@ -305,28 +336,47 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	}
 	
 	/**
-	 * Adiciona utilizador no interface do utilizador
+	 * Adds a new user to the User's Interface of the currently "Online"/"Connected"
+	 * presented in this Multicast Chat's Client-Side Service.
+	 * 
+	 * @param username the username of the user to be added to
+	 *        the User's Interface of the currently "Online"/"Connected"
+	 * 		  presented in this Multicast Chat's Client-Side Service
 	 */
-	protected void uiAddUser(String username) {
+	protected void usersInterfaceAddUser(String username) {
 		this.usersInChat.addElement(username);
 	}
 	
 	/**
-	 * Remove utilizador no interface do utilizador.
-	 * @return Devolve true se utilizador foi removido.
+	 * Removes a user from the User's Interface of the currently "Online"/"Connected"
+	 * presented in this Multicast Chat's Client-Side Service.
+	 * 
+	 * @param username the username of the user to be removed from
+	 *        the User's Interface of the currently "Online"/"Connected"
+	 * 		  presented in this Multicast Chat's Client-Side Service
+	 * 
+	 * @return the user removed from the User's Interface of the currently "Online"/"Connected"
+	 * 		   presented in this Multicast Chat's Client-Side Service
 	 */
-	protected boolean uiRemUser(String username) {
+	protected boolean usersInterfaceRemoveUser(String username) {
 		return this.usersInChat.removeElement(username);
 	}
 	
 	/**
-	 * Inicializa lista de utilizadores a partir de um iterador -- pode ser usado
-	 * obtendo iterador de qualquer estrutura de dados de java
+	 * Initialise the list of, currently "Online"/"Connected" users using
+     * the Multicast Chat's Client-Side Service from an Iterator,
+     * containing all the usernames of the "Online"/"Connected" users.
+     * 
+     * Can be used, obtaining any Java's data structure.
+	 * 
+	 * @param usersIterator an Iterator, containing all the usernames of
+	 *        the "Online"/"Connected" users
 	 */
-	protected void uiInitUsers(Iterator<String> usersIterator) {
+	protected void usersInterfaceUsersIteratorList(Iterator<String> usersIterator) {
 		this.usersInChat.clear();
 		
-		// There's currently "online" or active users using the Multicast Chat's Client-Side Service
+		// There's currently "Online"/"Connected" users using
+		// the Multicast Chat's Client-Side Service
 		if(usersIterator != null) {
 			while(usersIterator.hasNext())
 				this.usersInChat.addElement(usersIterator.next());
@@ -334,22 +384,30 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	}
 	
 	/**
-	 * Devolve um Enumeration com o nome dos utilizadores que aparecem no UI.
+	 * Returns an enumeration with the names of the users appearing
+	 * as "Online"/"Connected", in the this Multicast Chat's Client-Side Service
+	 * and respectively, Graphics User Interface.
+	 * 
+	 * @return an enumeration with the names of the users appearing
+	 * 		   as "Online"/"Connected", in the this Multicast Chat's Client-Side Service
+	 * 		   and respectively, Graphics User Interface
 	 */
-	protected Enumeration<String> uiListUsers() {
+	protected Enumeration<String> usersInterfaceListOfUsersEnumeration() {
 		return this.usersInChat.elements();
 	}
 	
-	// Configuracao do grupo multicast da sessao de chat na interface do cliente
 	/**
-	 * Configure the 
+	 * Configure the group of the Multicast Chat's Client-Side Service's session
+	 * in the Graphics User Interface.
 	 * 
-	 * @param username
-	 * @param group
-	 * @param port
-	 * @param timeToLive
+	 * @param username the username of the user that pretend to JOIN to the Multicast Chat's Client-Side Service's session
+	 * 		  in the Graphics User Interface
+	 * @param group the group of the Multicast Chat's Client-Side Service's session, in the Graphics User Interface
+	 * @param port the port of the Multicast Chat's Client-Side Service's session, in the Graphics User Interface
+	 * @param timeToLive the Time To Live (TTL) associated to the Multicast Chat's Client-Side Service's session,
+	 *        in the Graphics User Interface
 	 * 
-	 * @throws IOException
+	 * @throws IOException an Input/Output Exception to be thrown, in the case of, an anomaly occurs
 	 */
 	public void join(String username, InetAddress group, int port, 
 					 int timeToLive) throws IOException {
@@ -357,29 +415,32 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 		setTitle("CHAT Multicast IP " + username + "@" + group.getHostAddress() 
 				 + ":" + port + " [TTL=" + timeToLive + "]");
 
-		// Criar sessao de chat multicast
+		// Create a Multicast Chat's Client-Side Service's session
 		chat = new MulticastChat(username, group, port, timeToLive, this);
 	} 
 	
 	/**
+	 * Log a message which passed through the communication channel of
+	 * the Multicast Chat's Client-Side Service's session.
 	 * 
-	 * 
-	 * @param message
+	 * @param message the message which passed through the communication channel of
+	 *        the Multicast Chat's Client-Side Service's session
 	 */
 	protected void log(final String message) {
 		Date date = new Date();
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				conversationMessagesTextArea.append(message + "\n");
+				conversationMessagesTextArea.append(message + " at " + date + "\n");
 			} 
 		});
 	} 
 
 	/**
-	 * Envia mensagem. Chamado quando se carrega no botao de SEND ou se faz ENTER 
-	 * na linha da mensagem. 
-	 * Executa operacoes relacionadas com interface -- nao modificar
+	 * Send a normal message through the Multicast Chat's Client-Side Service's session.
+	 * It's called when a click on SEND button in the Graphic Interface for the
+	 * Multicast Chat's Client-Side Service occurs or, when the user press the ENTER key on
+	 * the keyboard in the messages' line
 	 */
 	protected void sendMessage() {
 		String messageToBeSent = messageToBeSentField.getText();
@@ -391,10 +452,11 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 		messageToBeSentField.requestFocus();
 	}
 
-	/**
-	 * Executa operacoes relativas ao envio de mensagens
+	/*
+	 * Execute the operations related to the process of sending messages,
+	 * through Multicast Chat's Client-Side Service's session
 	 */
-	protected void doSendMessage( String message) {
+	protected void doSendMessage(String message) {
 		try {
 			chat.sendNormalMessage(message);
 		}
@@ -406,31 +468,30 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 		} 
 	}
 	
-	
 	/**
-	 * Imprime mensagem de erro
+	 * Display/Print a message related to the Graphic Interface for
+	 * the Multicast Chat's Client-Side Service and, which it's being passed through
+	 * the communication of the Multicast Chat's Client-Side Service's session
 	 */
-	protected void displayMsg( final String str, final boolean error) {
-		final JFrame f = this;
+	protected void displayMessage(final String string, final boolean error) {
+		final JFrame jFrame = this;
 
 		SwingUtilities.invokeLater(new Runnable() {
+			
 			public void run() {
-				if( error)
-					JOptionPane.showMessageDialog(f, str, "Chat Error", JOptionPane.ERROR_MESSAGE);
-				else
-					JOptionPane.showMessageDialog(f, str, "Chat Information", JOptionPane.INFORMATION_MESSAGE);
-			} 
-			});
+				if(error) {
+					JOptionPane.showMessageDialog(jFrame, string, "Chat Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					JOptionPane.showMessageDialog(jFrame, string, "Chat Information", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
 	}
 
 	/**
-	 * Pede downlaod dum ficheiro. Chamado quando se carrega no botao de SEND ou se faz ENTER 
-	 * na linha de download. 
-	 * Executa operacoes relacionadas com interface -- nao modificar
-	 */
-	
-	/**
-	 * Ask for the download of a file.
+	 * Ask for the download of a file
+	 * 
 	 * This method/function it's called when the
 	 * SEND button or the 'ENTER' key in the user's keyboard is pressed.
 	 */
@@ -452,22 +513,18 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 	}
 
 	/**
-	 * Executa operacoes relativas ao envio de mensagens.
+	 * Execute operations related with the download of the file
 	 * 
-	 * NOTA: Qualquer informacao ao utilizador deve ser efectuada usando 
-	 * o metodo "displayMsg".
+	 * NOTE: Any information to be reported to the user should made using the method "displayMessage"
 	 */
-	protected void doDownloadFile( String file) {
-		// TODO: a completar
-		System.err.println( "Pedido download do ficheiro " + file);
+	protected void doDownloadFile(String file) {
+		// TODO: to complete
+		System.err.println("Request the download of the file: " + file);
 	}
 
 	/**
-	 * Chamado quando o utilizador fechou a janela do chat
-	 */
-	
-	/**
-	 * 
+	 * Method called when an user close the window of Graphic Interface of
+	 * the Multicast Chat's Client-Side Service's session
 	 */
 	protected void onQuit() {
 		try {
@@ -475,44 +532,50 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 				chat.terminateService();
 		}
 		catch (Throwable ex) {
-			JOptionPane.showMessageDialog(this, "Erro no termino do chat:  "
-										  + ex.getMessage(), "ERRO no Chat", 
+			JOptionPane.showMessageDialog(this, "ERROR in the termination of the Chat's Service: "
+										  + ex.getMessage(), " - ERROR occurred in the Chat's Service", 
 										 JOptionPane.ERROR_MESSAGE);
 		} 
 	} 
 
-	// Invocado quando s erecebe uma mensagem  // 
-	
 	/**
-	 * 
+	 * Method called when an user receive a message through the window of
+	 * Graphic Interface of the Multicast Chat's Client-Side Service's session
 	 */
-	public void chatMessageReceived(String username, InetAddress address, 
-									int port, String message) {
-		log("MSG:[" + username+"@"+address.getHostName() + "] disse: " + message);
+	public void chatMessageReceived(String username, InetAddress address, int port, String message) {
+		this.log("MESSAGE [from " + username + " @ " + address.getHostName() + "]:\n- " + message);
 	} 
 
-
-	// Invocado quando um novo utilizador se juntou ao chat  // 
-	public void chatParticipantJoined(String username, InetAddress address, 
-									  int port) {
-		log("+++ NOVO PARTICIPANTE: " + username + " juntou-se ao grupo do chat a partir de " + address.getHostName()
-			+ ":" + port);
+	/**
+	 * Method called when an user joined to the the Multicast Chat's Client-Side Service's session
+	 */
+	public void chatParticipantJoined(String username, InetAddress address, int port) {
+		this.log("A NEW PARTICIPANT JOINED [" + username + " joined to the group of this Chat's Service from: "
+				 + address.getHostName() + ":" + port + "]");
 	} 
 
-	// Invocado quando um utilizador sai do chat  // 
+	/**
+	 * Method called when an user left the the Multicast Chat's Client-Side Service's session
+	 */
 	public void chatParticipantLeft(String username, InetAddress address, 
 									int port) {
-		log("--- ABANDONO: " + username + " ababdonou o grupo de chat, a partir de " + address.getHostName() + ":" 
-			+ port);
+		log("A PARTICIPANT LEFT [" + username + " left the group of this Chat's Service from: " 
+		    + address.getHostName() + ":" + port + "]");
 	} 
 
-	// Command-line invocation expecting three arguments
+	/**
+	 * Command-line invocation of Multicast Chat's Client-Side Service's session,
+	 * expecting at least, thre arguments, at least, with one optional more
+	 * 
+	 * @param args three arguments, at least, with one optional more
+	 *             [ <username> <group address of IP Multicast> <port> { optional: <ttl (time to live)> } ]
+	 */
 	public static void main(String[] args) {
 		
 		if((args.length != 3) && (args.length != 4)) {
-			System.err.println("Utilizar: MChatCliente " 
-							   + "<nickusername> <grupo IPMulticast> <porto> { <ttl> }");
-			System.err.println("       - TTL default = 1");
+			System.err.println("Usage: MChatCliente " 
+							   + "<username> <group address of IP Multicast> <port> { optional: <ttl (time to live)> }");
+			System.err.println("       - TTL (TIME TO LIVE) default value = 1");
 			System.exit(1);
 		} 
 
@@ -539,8 +602,9 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 
 		try {
 			port = Integer.parseInt(args[2]);
-		} catch (NumberFormatException e) {
-			System.err.println("Invalid Port: " + args[2]);
+		}
+		catch (NumberFormatException e) {
+			System.err.println("Invalid Port: '" + args[2] + "'");
 			System.exit(1);
 		} 
 
@@ -549,21 +613,21 @@ public class MulticastChatClient extends JFrame implements MulticastChatEventLis
 				timeToLive = Integer.parseInt(args[3]);
 			}
 			catch (NumberFormatException e) {
-				System.err.println("Invalid TTL: " + args[3]);
+				System.err.println("Invalid TTL: '" + args[3] + "'");
 				System.exit(1); 
 			} 
 		} 
 
 		try {
-			MulticastChatClient frame = new MulticastChatClient();
-			frame.setSize(800, 300);
-			frame.setVisible( true);
+			MulticastChatClient multicastChatClientSessionFrame = new MulticastChatClient();
+			multicastChatClientSessionFrame.setSize(800, 300);
+			multicastChatClientSessionFrame.setVisible(true);
 
-			frame.join(username, group, port, timeToLive);
+			multicastChatClientSessionFrame.join(username, group, port, timeToLive);
 		}
 		catch (Throwable errorException) {
-			System.err.println("Error occured while the frame was initialising: " + errorException.getClass().getName() 
-							   + ": " + errorException.getMessage());
+			System.err.println("Error occured while the frame of the Multicast Chat's Client-Side Service's session was initialising [" +
+								errorException.getClass().getName() + ": " + errorException.getMessage() + "]");
 			
 			System.exit(1);
 		} 
