@@ -1,4 +1,4 @@
-package application.capitalisation;
+package application.capitalisation.server;
 
 /**
  *

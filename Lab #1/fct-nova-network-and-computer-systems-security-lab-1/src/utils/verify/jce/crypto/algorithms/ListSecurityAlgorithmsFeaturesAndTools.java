@@ -25,8 +25,11 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * Class responsible for the lists of all the sets of Security/Crypto Algorithms, Features and Tools,
- * installed in this computer/machine, as also, their respectively organisation by category.
+ * Class responsible for the List Security Algorithms, Features and Tools. 
+ * 
+ * Description:
+ * - Lists of all the sets of Security/Crypto Algorithms, Features and Tools,
+ *   installed in this computer/machine, as also, their respectively organisation by category;
  * 
  * Sets/Categories available:
  * a) Cipher Algorithms (Cryptographic Algorithms);
