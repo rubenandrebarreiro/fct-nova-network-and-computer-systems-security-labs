@@ -1,4 +1,4 @@
-package secure.macs.tampering.attack;
+package secure.macs.tampering.attack.simple;
 
 /**
 *
@@ -42,7 +42,7 @@ public class SimpleTamperingAttackExample1 {
      * @param args no arguments
      * 
      * @throws Exception an Exception to be thrown, in the case of, an anomaly occur, during the simulation of
-	 *         the Tampering Active Attack to a HMacSHA256 Algorithm - Message Digest Encryption/De-cryption processes
+	 *         the Tampering Active Attack to a Encryption/De-cryption processes
      */
 	public static void main(String[] args) throws Exception {
 		
@@ -73,7 +73,6 @@ public class SimpleTamperingAttackExample1 {
     	System.out.println();
     	
     	// The Encryption process made by Alice and the ciphering of its respectively content
-    	// Cipher =  Message|Hash(Message)
     	cipher.init(Cipher.ENCRYPT_MODE, secretKey, initialVectorParameterSpecifications);
         
     	byte[] cipherText = cipher.doFinal(UtilsExtended.toByteArray(inputTransactionData));
@@ -86,6 +85,7 @@ public class SimpleTamperingAttackExample1 {
       	
       	System.out.println();
       	System.out.println();
+      	
       	
       	// THE SIMULATION OF THE TAMPERING ATTACK
         
@@ -117,7 +117,8 @@ public class SimpleTamperingAttackExample1 {
     	System.out.println("----------------------------------------------------------------------------------------------------------------------");
 
         /************************************************************/
-        
+
+    	
       	System.out.println();
       	System.out.println();
       	
