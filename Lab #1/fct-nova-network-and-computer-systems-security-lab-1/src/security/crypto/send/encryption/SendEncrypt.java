@@ -105,7 +105,7 @@ public class SendEncrypt {
 
 			System.out.println("--------------------------------------------");
 			System.out.println("Plain Text pretended to be send in hexadecimal:\n");
-			System.out.println("- " + Utils.toHex(plainTextBytes, plainTextBytes.length));
+			System.out.println("- " + Utils.toHex(plainTextBytes, plainTextBytes.length) + "\n");
 			System.out.println("----------------------------------------------");
 
 			// Set the Cipher accordingly to the Cipher's Suite, and also, all their respectively,
@@ -121,7 +121,7 @@ public class SendEncrypt {
 			System.out.println("----------------------------------------------");
 			System.out.println("Cipher Text to be, really, send in hexadecimal:\n");
 			System.out.println(" - " + Utils.toHex(ciphertext, ciphertext.length)
-							   + " [Size: " + ciphertext.length + "]");
+							   + " [Size: " + ciphertext.length + "]\n");
 			System.out.println("----------------------------------------------");
 
 			// Send the cipher text through a TCP socket,
