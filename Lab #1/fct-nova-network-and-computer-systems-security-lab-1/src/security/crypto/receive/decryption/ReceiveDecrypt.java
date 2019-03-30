@@ -125,7 +125,7 @@ public class ReceiveDecrypt {
 					dataInputStream.read(ciphertext);
 
 					System.out.println("----------------------------------------------");
-					System.out.println("Cipher Text received in hexadecimal format:\n");
+					System.out.println("Cipher Text received in hexadecimal format:");
 					System.out.println("- " + Utils.toHex(ciphertext, ciphertext.length) 
 									   + " [Size: " +ciphertext.length + "]\n");
 					System.out.println("----------------------------------------------");
@@ -176,7 +176,7 @@ public class ReceiveDecrypt {
 			// containing the original message and another configurations required previously,
 			// during all the process
 			System.out.println("----------------------------------------------");    
-			System.out.println("Plain Text in hexadecimal format:\n");
+			System.out.println("Plain Text in hexadecimal format:");
 			System.out.println("- " + Utils.toHex(plainText, plainTextLength)
 							   + " [Size: " + plainTextLength + "]");
 			System.out.println("----------------------------------------------");    
@@ -189,7 +189,7 @@ public class ReceiveDecrypt {
 			// Print the content of the data of the message received,
 			// after its de-cryption process and the respectively, de-ciphering
 			System.out.println("----------------------------------------------");      
-			System.out.println("Original Plain Text of the Message:\n");
+			System.out.println("Original Plain Text of the Message:");
 			System.out.println("- " + originalMessage);
 			System.out.println("----------------------------------------------");      
 		}

@@ -104,7 +104,7 @@ public class SendEncrypt {
 			byte[] plainTextBytes = plaintext.getBytes();
 
 			System.out.println("--------------------------------------------");
-			System.out.println("Plain Text pretended to be send in hexadecimal:\n");
+			System.out.println("Plain Text pretended to be send in hexadecimal:");
 			System.out.println("- " + Utils.toHex(plainTextBytes, plainTextBytes.length) + "\n");
 			System.out.println("----------------------------------------------");
 
@@ -119,7 +119,7 @@ public class SendEncrypt {
 			// containing the original message and another configurations required previously,
 			// during all the process
 			System.out.println("----------------------------------------------");
-			System.out.println("Cipher Text to be, really, send in hexadecimal:\n");
+			System.out.println("Cipher Text to be, really, send in hexadecimal:");
 			System.out.println(" - " + Utils.toHex(ciphertext, ciphertext.length)
 							   + " [Size: " + ciphertext.length + "]\n");
 			System.out.println("----------------------------------------------");
