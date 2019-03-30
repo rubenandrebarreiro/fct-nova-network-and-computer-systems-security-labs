@@ -1,4 +1,4 @@
-package secure.macs.tampering;
+package secure.macs.tampering.attack;
 
 /**
 *
@@ -31,32 +31,44 @@ import security.crypto.common.UtilsExtended;
  * Class responsible for Tampering Attack To Message Digest Example.
  * 
  * Description:
- * TODO
- * - A simple and basic class and respectively, program, to show an example of a Tampering Attack to
- *   a HMacSHA256 Algorithm - Message Digest Encryption/De-cryption processes;
+ * - A simple and basic class and respectively, program, to show an example of a Tampering Active Attack to
+ *   a SHA1 Algorithm - Message Digest Encryption/De-cryption processes,
+ *   using the Cipher' = Encryption w/ Secret Key ( Cipher ), where Cipher = Message|Hash(Message);
  *   
  * NOTE:
- * - This type of Encryption/De-cryption (HMacSHA256 Algorithm - Message Digest)
+ * - This type of Encryption/De-cryption (SHA1 Algorithm - Message Digest)
  *   it's more used for communications of exchanging of messages or transactions, per example;
  * - Message tampering - Cipher with synthesis, AES (Advanced Encryption Standard - Rijndael)
- *   and CTR mode byte oriented (byte counter oriented);
+ *   and CTR mode byte oriented (byte counter oriented), with no Padding;
  * - Encryption of most of transactions type NEVER should be done byte oriented (byte counter oriented),
  *   but block oriented, because it's always more safe;
  * - Encryption byte oriented (byte counter oriented) should be used in Chat's service in
  *   real time and similar type of applications;
  */
 public class TamperingAttackToMessageDigestExample {
-	 public static void main(String[] args) throws Exception {
+	
+	/**
+	 * Main method. Simulates a Tampering Active Attack made by Mallory to a money transaction to
+	 * a Bank Account made by Alice to Bob.
+	 * 
+	 * @param args no arguments
+	 * 
+	 * @throws Exception an Exception to be thrown, in the case of, an anomaly occur, during the simulation of
+	 *         the Tampering Active Attack to a SHA1 Algorithm - Message Digest Encryption/De-cryption processes
+	 */
+	public static void main(String[] args) throws Exception {
 		    
 	    	// The source/seed of a secure random
 	    	SecureRandom secureRandom = new SecureRandom();
 	    	
-	    	// The Initialising Vector and its parameters specifications
+	    	// The Initialising Vector and its parameter specifications
 	        IvParameterSpec intialisingVectorParameterSpecifications = UtilsExtended.createCtrIvForAES(1, secureRandom);
 	        
 	        // The 1st Secret Key specifications generated to be
 	    	// used in this Message Digest Encryption/De-cryption processes
-	    	// using CTR mode byte oriented (byte counter oriented);
+	    	// using the AES (Advanced Encryption Standard - Rijndael) Algorithm,
+			// with CTR mode byte oriented (byte counter oriented), no Padding and
+	        // a Secret Key of 256-bit length/size
 	        Key secretKey = UtilsExtended.createKeyForAES(256, secureRandom);
 	        Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
 	        
@@ -88,8 +100,8 @@ public class TamperingAttackToMessageDigestExample {
 	        							             inputTransactionData.length(), 
 	        							             cipherText, 0);
 	        
-	        // Update the Hash value with the Input Text based in SHA1 encryption algorithm
-	        // Cipher' = Encryption w/ secret key ( Cipher )
+	        // Update the Hash value with the Input Text based in SHA1's Encryption Algorithm
+	        // Cipher' = Encryption w/ Secret Key ( Cipher )
 	        // NOTE:
 	        // - Cipher = Message|Hash(Message)
 	        hashMessageDigest.update(UtilsExtended.toByteArray(inputTransactionData));
@@ -99,7 +111,9 @@ public class TamperingAttackToMessageDigestExample {
 	        		                           hashMessageDigest.getDigestLength(),
 	        		                           cipherText, cipherTextLength);
 	        
+	        
 	        // THE SIMULATION OF THE TAMPERING ATTACK
+	       
 	        /************************************************************/
 	        // The Tampering Attack made by Mallory (MiM) to a Back Account's transaction 
 	        // Changing the byte no. 9 from the value 0 to the value 9:
@@ -140,7 +154,7 @@ public class TamperingAttackToMessageDigestExample {
 	    	System.out.println("-----------------------------------------------------------------------------");
 	        System.out.println("Plain Text of the Received Data of the Back Account Transaction by Bob:");
 	    	System.out.println("- " + UtilsExtended.toString(plainText, messageLength));
-	        System.out.println("Verified with Message-integrity and Message-Authentication:");
+	        System.out.println("Verified with Message-Integrity and Message-Authentication:");
 	        System.out.println("- " + MessageDigest.isEqual(hashMessageDigest.digest(), messageHashBytes));
 	    	System.out.println("-----------------------------------------------------------------------------");
 	 }	

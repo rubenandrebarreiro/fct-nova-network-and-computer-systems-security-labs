@@ -1,4 +1,4 @@
-package secure.macs.tampering;
+package secure.macs.tampering.attack;
 
 /**
 *
@@ -33,14 +33,15 @@ import security.crypto.common.UtilsExtended;
  * Class responsible for Tampering Attack To Mac Example.
  * 
  * Description:
- * - A simple and basic class and respectively, program, to show an example of a Tampering Attack to
- *   a HMacSHA256 Algorithm - Message Digest Encryption/De-cryption processes;
+ * - A simple and basic class and respectively, program, to show an example of a Tampering Active Attack to
+ *   a HMacSHA256 Algorithm - Message Digest Encryption/De-cryption processes,
+ *   using the Cipher = Message|Hash(Message);
  *   
  * NOTE:
  * - This type of Encryption/De-cryption (HMacSHA256 Algorithm - Message Digest)
  *   it's more used for communications of exchanging of messages or transactions, per example;
  * - Message tampering - Cipher with synthesis, AES (Advanced Encryption Standard - Rijndael)
- *   and CTR mode byte oriented (byte counter oriented);
+ *   and CTR mode byte oriented (byte counter oriented), with no Padding;
  * - Encryption of most of transactions type NEVER should be done byte oriented (byte counter oriented),
  *   but block oriented, because it's always more safe;
  * - Encryption byte oriented (byte counter oriented) should be used in Chat's service in
@@ -49,25 +50,27 @@ import security.crypto.common.UtilsExtended;
 public class TamperingAttackToHMacExample {
 	
 	/**
-	 * Main method. Simulates a Tampering Attack made by Mallory to a money transaction to
-	 * a Bank Account made by of Alice.
+	 * Main method. Simulates a Tampering Active Attack made by Mallory to a money transaction to
+	 * a Bank Account made by Alice to Bob.
 	 * 
 	 * @param args no arguments
 	 * 
-	 * @throws Exception to be thrown, in the case of, an anomaly occur, during the simulation of
-	 *         the Tampering Attack to a HMacSHA256 Algorithm - Message Digest Encryption/De-cryption processes
+	 * @throws Exception an Exception to be thrown, in the case of, an anomaly occur, during the simulation of
+	 *         the Tampering Active Attack to a HMacSHA256 Algorithm - Message Digest Encryption/De-cryption processes
 	 */
     public static void main(String[] args) throws Exception {
     	
     	// The source/seed of a secure random
     	SecureRandom secureRandom = new SecureRandom();
     	
-    	// The Initialising Vector and its parameters specifications
+    	// The Initialising Vector and its parameter specifications
     	IvParameterSpec initialisationVectorSpecifications = UtilsExtended.createCtrIvForAES(1, secureRandom);
     	
     	// The 1st Secret Key specifications generated to be
     	// used in this Message Digest Encryption/De-cryption processes
-    	// using CTR mode byte oriented (byte counter oriented);
+    	// using the AES (Advanced Encryption Standard - Rijndael) Algorithm,
+		// with CTR mode byte oriented (byte counter oriented), no Padding and
+		// a Secret Key of 256-bit length/size
     	Key secretKey = UtilsExtended.createKeyForAES(256, secureRandom);
     	Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding");
     	
@@ -91,7 +94,7 @@ public class TamperingAttackToHMacExample {
     	System.out.println();
         
         // The (correct) Encryption process made by Alice and the ciphering of its respectively content
-    	// Cipher = Message|Hash(Message) TODO
+    	// Cipher = Message|Hash(Message)
     	cipher.init(Cipher.ENCRYPT_MODE, secretKey, initialisationVectorSpecifications);
         
         byte[] cipherText = new byte[cipher.getOutputSize(inputTransactionData.length() + hMac.getMacLength())];
@@ -105,9 +108,10 @@ public class TamperingAttackToHMacExample {
       
         // The length of bytes resulting of the Cipher Text
         cipherTextLength += cipher.doFinal(hMac.doFinal(), 0, hMac.getMacLength(), cipherText, cipherTextLength);
-
+        
         
         // THE SIMULATION OF THE TAMPERING ATTACK
+        
         /************************************************************/
         // The Tampering Attack made by Mallory (MiM) to a Back Account's transaction 
         // Changing the byte no. 9 from the value 0 to the value 9:
@@ -150,7 +154,7 @@ public class TamperingAttackToHMacExample {
     	System.out.println("-----------------------------------------------------------------------------");
         System.out.println("Plain Text of the Received Data of the Back Account Transaction by Bob:");
     	System.out.println("- " + UtilsExtended.toString(plainText, messageLength));
-        System.out.println("Verified with Message-integrity and Message-Authentication:");
+        System.out.println("Verified with Message-Integrity and Message-Authentication:");
         System.out.println("- " + MessageDigest.isEqual(hMac.doFinal(), messageHashBytes));
     	System.out.println("-----------------------------------------------------------------------------");
     }
