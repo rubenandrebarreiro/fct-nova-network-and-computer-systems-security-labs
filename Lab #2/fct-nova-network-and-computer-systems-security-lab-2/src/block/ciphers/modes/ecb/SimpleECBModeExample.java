@@ -84,7 +84,7 @@ public class SimpleECBModeExample {
 	    // - PKCS5 Padding (or no Padding)
 	    // 4) Java Security Provider:
 	    // - SunJCE
-	    Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding", "SunJCE");
+	    Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
 	    //Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding", "SunJCE");
 	    //Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding", "BC");
 

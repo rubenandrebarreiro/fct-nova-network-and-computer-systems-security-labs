@@ -32,7 +32,6 @@ import security.crypto.common.Utils;
  *   an AES (Advanced Encryption Standard - Rijndael) Symmetric Encryption/De-cryption
  *   with CTR Mode, {some-padding} and Secret Key of 256-bit size;
  * - Normalised mode by NIST, SP-800-38a and defined at RFC 3686;
- * 
  */
 public class SimpleCTRModeExample {
 	
@@ -47,6 +46,7 @@ public class SimpleCTRModeExample {
 	 * 		   Symmetric Encryption/De-cryption
 	 */
 	public static void main(String[] args) throws Exception {
+		
 		// NOTE:
 		// Input lengths/block size available/allowed to the
 		// AES (Advanced Encryption Standard - Rijhanel)
@@ -76,7 +76,7 @@ public class SimpleCTRModeExample {
  	    SecretKeySpec secretKeySpecifications = new SecretKeySpec(secretKeyBytes, "AES");
      
     	// The parameter specifications for the Initialising Vector
-        IvParameterSpec initialisationVectorParameterSpecifications = new IvParameterSpec(initialisingVectorBytes);
+        IvParameterSpec initialisingVectorParameterSpecifications = new IvParameterSpec(initialisingVectorBytes);
         
         // Set the Cipher to be used, configuring all the parameters
 	    // 1) Encryption/De-cryption Algorithm:
@@ -88,7 +88,7 @@ public class SimpleCTRModeExample {
 	    // - PKCS5 Padding (or no Padding)
 	    // 4) Java Security Provider:
 	    // - SunJCE
-        Cipher cipher = Cipher.getInstance("AES/CTR/PKCS5Padding", "SunJCE");
+        Cipher cipher = Cipher.getInstance("AES/CTR/PKCS5Padding");
 	    //Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding", "SunJCE");
 	    //Cipher cipher = Cipher.getInstance("AES/CTR/PKCS5Padding", "BC");
         
@@ -104,7 +104,7 @@ public class SimpleCTRModeExample {
         System.out.println();
 	
         // The Encryption process and the ciphering of its respectively content
-        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpecifications, initialisationVectorParameterSpecifications);
+        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpecifications, initialisingVectorParameterSpecifications);
         
         byte[] cipherText = new byte[cipher.getOutputSize(inputDataBytes.length)];
         
@@ -122,7 +122,7 @@ public class SimpleCTRModeExample {
       	System.out.println();
         
       	// The De-cryption process and the de-ciphering of its respectively content
-      	cipher.init(Cipher.DECRYPT_MODE, secretKeySpecifications, initialisationVectorParameterSpecifications);
+      	cipher.init(Cipher.DECRYPT_MODE, secretKeySpecifications, initialisingVectorParameterSpecifications);
      
       	// The Plain Text of the bytes of the data input received through the communication channel
       	byte[] plainText = new byte[cipher.getOutputSize(cipherTextLength)];
