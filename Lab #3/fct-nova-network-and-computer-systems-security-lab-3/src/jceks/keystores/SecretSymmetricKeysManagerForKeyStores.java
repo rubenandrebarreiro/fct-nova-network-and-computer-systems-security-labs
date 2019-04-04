@@ -1,20 +1,49 @@
 package jceks.keystores;
 
+/**
+*
+* Network and Computer Systems Security
+* 
+* Practical Lab #3.
+* 
+* Integrated Master of Computer Science and Engineering
+* Faculty of Science and Technology of New University of Lisbon
+* 
+* Authors (Professors):
+* @author Henrique Joao Domingos - hj@fct.unl.pt
+* 
+* Adapted by:
+* @author Ruben Andre Barreiro - r.barreiro@campus.fct.unl.pt
+* @author Vicente Alves Almeida - vo.almeida@campus.fct.unl.pt
+*
+*/
+
 import java.io.FileInputStream;
 import java.security.Key;
 import java.security.KeyStore;
 import java.util.Base64;
 
+/**
+ * Class responsible for Secret Symmetric Keys Manager for Key Stores.
+ * 
+ * Description:
+ * - A simple and basic class and respectively, program, to implement
+ *   a Secret Symmetric Keys Manager for Key Stores;
+ */
 public class SecretSymmetricKeysManagerForKeyStores {
 	
 	/**
-	 * Main methods.
+	 * Main method. Performs a generation of Secret Symmetric Keys from
+	 * a Manager for Key Stores. The generate Secret Symmetric Keys will be
+	 * saved and kept as the format of key-entry = <key-id, key-value>.
 	 * 
 	 * @param args no arguments
 	 */
 	public static void main(String[] args) {
-
 		try {
+			
+			
+			// Global Instance Variables:
 			
 			// The Key Store where Symmetric Secret Keys are saved and stored
 			// NOTE:
@@ -55,18 +84,14 @@ public class SecretSymmetricKeysManagerForKeyStores {
             System.out.println("----------------------------------------------------------------------------------------------------------");
             System.out.println("My Secret Key #1:");
             System.out.println("----------------------------------------------------------------------------------------------------------");
-            
             System.out.println("Crypto's Algorithm: " + secretKey1.getAlgorithm());
             System.out.println("Size in Bytes: " + secretKey1Bytes.length);
     	    System.out.println("Format: " + secretKey1.getFormat());
     	    System.out.println("Bytes Encoded (in Base64): " + secretKey1String);
-    	    
-            System.out.println("----------------------------------------------------------------------------------------------------------");
-            
+    	    System.out.println("----------------------------------------------------------------------------------------------------------");
             
             System.out.println();
             System.out.println();
-            
             
             // The Encoded format of the Secret Key #2
 			byte[] secretKey2Bytes = secretKey2.getEncoded();
@@ -79,16 +104,11 @@ public class SecretSymmetricKeysManagerForKeyStores {
             System.out.println("----------------------------------------------------------------------------------------------------------");
 	        System.out.println("My Secret Key #2:");
             System.out.println("----------------------------------------------------------------------------------------------------------");
-	         
 	        System.out.println("Crypto's Algorithm: " + secretKey2.getAlgorithm());
 	        System.out.println("Size in Bytes: " + secretKey2Bytes.length);
 	 	    System.out.println("Format: " + secretKey2.getFormat());
 	 	    System.out.println("Bytes Encoded (in Base64): " + secretKey2String);
-	 	    
-            System.out.println("----------------------------------------------------------------------------------------------------------");
-            
-            System.out.println();
-            System.out.println();
+	 	    System.out.println("----------------------------------------------------------------------------------------------------------");
 		}
 		catch (Exception exception) {
 			System.err.println("Error in the generation of Symmetric Secret Keys!!!");			
