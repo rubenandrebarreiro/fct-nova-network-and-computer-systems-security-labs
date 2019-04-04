@@ -1,0 +1,27 @@
+#
+# Description of the KeyTool:
+# - Java tool (based in command-line) to generate Secret Keys to normalised Key Stores;
+# - In the case of Symmetric Cryptography, the Key Stores are persistent objects that
+#   to save and keep Symmetric Keys must be of JCEKS type;
+# 
+# Example of Usage:
+# - Generate Symmetric Key based in AES (Advanced Encryption Standard - Rijndael) Algorithm,
+#   with size of 128-bits, that will be kept in a file called "mykeystore.jks";
+# 
+# Command-line Instructions:
+# - keytool -genseckey -alias mykey1 -keyalg AES -keysize 128 -storetype jceks -keystore mykeystore.jks
+# - keytool -genseckey -alias mykey2 -keyalg Blowfish -keysize 448 -storetype jceks -keystore mykeystore.jks
+#
+# The Key Stores store the Secret Keys in "Entries", as "key-value" stored locally,
+# that in each entry contains a Secret Key, indexed by an identifier:
+# - <key-id, key-value>
+#
+# Too see the content of the Key Store:
+# - keytool -list -keystore mykeystore.jks -storetype jceks
+#
+# From this normalised process of management of Secret Keys in Key Stores
+# as keeper of Symmetric Keys, will be easy to have Java Programs with
+# a normalised structure to access and management of the Secret Keys,
+# that will use:
+# - See the exemplified Java code about the usage of Key Stores
+#

@@ -1,0 +1,22 @@
+#
+# Example of Java Code to create Key Stores:
+#
+# private static KeyStore createKeyStore(String keyStoreFileName, String keyStorePassword) throws Exception {
+#	
+# 	 File keyStoreFile = new File(keyStoreFileName);
+#
+#    final KeyStore keyStore = KeyStore.getInstance("JCEKS");
+#    
+#    // If the Key Store File (.keystore) already exist, load it
+#    if(file.exists()) {
+#        keyStore.load(new FileInputStream(file), keyStorePassword.toCharArray());
+#    }
+#    // If the Key Store File (.keystore) don't exist, create it
+#    else {
+#        keyStore.load(null, null);
+#        keyStore.store(new FileOutputStream(keyStoreFileName), keyStorePassword.toCharArray());
+#    }
+# 
+#    return keyStore;
+# }
+#
