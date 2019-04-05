@@ -39,7 +39,7 @@ public class SecretKeyGeneratorExample {
 	
 	/**
 	 * Main method. Performs a generation of Secret Key using AES (Advanced Encryption Standard - Rijndael)
- *   Symmetric Encryption/De-cryption with CBC Mode, {some-padding} and Secret Key of 192-bit size.
+     * Symmetric Encryption/De-cryption with CBC Mode, {some-padding} and Secret Key of 192-bit size.
 	 * 
 	 * @param args no arguments
 	 * 
