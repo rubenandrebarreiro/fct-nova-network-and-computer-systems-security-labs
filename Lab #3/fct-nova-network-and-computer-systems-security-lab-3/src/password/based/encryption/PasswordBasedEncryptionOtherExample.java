@@ -91,15 +91,6 @@ public class PasswordBasedEncryptionOtherExample {
         // The Iteration Count
         int iterationCount = 2048;
         
-        // The Password Based Encryption's Secret Key Specifications
-        PBEKeySpec passwordBasedEncryptionKeySpecifications = new PBEKeySpec(passwordEncryption);
-        
-        // The Secret Key's Factory to generate the Secret Keys
-        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWITHSHA256AND192BITAES-CBC-BC","BC");
-        
-        // The Secret Key generated
-        Key secretKey = keyFactory.generateSecret(passwordBasedEncryptionKeySpecifications);
-
         // Print the byte stream of the data information used as Input
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Input Data:");
@@ -108,6 +99,12 @@ public class PasswordBasedEncryptionOtherExample {
         
         System.out.println();
         System.out.println();
+        
+        // The Password Based Encryption's Secret Key Specifications
+        PBEKeySpec passwordBasedEncryptionKeySpecifications = new PBEKeySpec(passwordEncryption);
+        
+        // The Secret Key's Factory to generate the Secret Keys
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWITHSHA256AND192BITAES-CBC-BC","BC");
         
         // TODO
         // Set the Cipher to be used in the Encryption process, configuring all the parameters
@@ -120,7 +117,10 @@ public class PasswordBasedEncryptionOtherExample {
 	    // - PKCS5 Padding (or no Padding)
 	    // 4) Java Security Provider:
 	    // - BC 
-        Cipher cipherEncryption = Cipher.getInstance("PBEWITHSHA256AND192BITAES-CBC-BC","BC");
+        Cipher cipherEncryption = Cipher.getInstance("PBEWITHSHA256AND192BITAES-CBC-BC", "BC");
+        
+        // The Secret Key generated
+        Key secretKey = keyFactory.generateSecret(passwordBasedEncryptionKeySpecifications);
         
         // The Encryption process and the ciphering of its respectively content
         cipherEncryption.init(Cipher.ENCRYPT_MODE, secretKey, new PBEParameterSpec(saltEncryption, iterationCount));
@@ -153,7 +153,7 @@ public class PasswordBasedEncryptionOtherExample {
 	    // - PKCS5 Padding (or no Padding)
 	    // 4) Java Security Provider:
 	    // - BC 
-        Cipher cipherDecryption = Cipher.getInstance("PBEWITHSHA256AND192BITAES-CBC-BC","BC");
+        Cipher cipherDecryption = Cipher.getInstance("PBEWITHSHA256AND192BITAES-CBC-BC", "BC");
         
         // The De-cryption process and the de-ciphering of its respectively content
         cipherDecryption.init(Cipher.DECRYPT_MODE, secretKey, new PBEParameterSpec(saltEncryption, iterationCount));
