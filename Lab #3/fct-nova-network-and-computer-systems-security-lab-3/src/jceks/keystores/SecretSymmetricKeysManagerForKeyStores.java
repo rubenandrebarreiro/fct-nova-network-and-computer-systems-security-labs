@@ -75,10 +75,10 @@ public class SecretSymmetricKeysManagerForKeyStores {
 			
 			// The Encoded format of the Secret Key #1
 			byte[] secretKey1Bytes = secretKey1.getEncoded();
-			//String secretKey1String = new String(secretKey1Bytes);
 			
 			// The String representation of the Encoded Bytes of the Secret Key #1
 			String secretKey1String = Base64.getEncoder().encodeToString(secretKey1Bytes);
+			//String secretKey1String = new String(secretKey1Bytes);
 			
 			// Print the information related to the Secret Key #1
             System.out.println("----------------------------------------------------------------------------------------------------------");
